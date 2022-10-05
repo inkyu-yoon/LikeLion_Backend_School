@@ -2,6 +2,7 @@ package Lecture.Date221005.StatementMaker;
 
 import java.util.Scanner;
 
+
 public class StatementMakerMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -23,6 +24,7 @@ class StatementMaker{
     WordMaker wm1;
     WordMaker wm2;
     WordMaker wm3;
+
     StatementMaker(WordMaker wm1,WordMaker wm2,WordMaker wm3){
         this.wm1=wm1;
         this.wm2=wm2;

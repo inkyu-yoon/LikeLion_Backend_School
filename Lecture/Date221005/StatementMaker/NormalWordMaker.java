@@ -14,4 +14,5 @@ public class NormalWordMaker implements WordMaker{
     public String returnWord(int num) {
         return ""+num;
     }
+
 }
