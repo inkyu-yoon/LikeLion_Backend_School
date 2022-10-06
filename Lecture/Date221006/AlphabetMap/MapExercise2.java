@@ -1,0 +1,31 @@
+package Lecture.Date221006.AlphabetMap;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+
+public class MapExercise2 {
+    public static void main(String[] args) throws IOException {
+        //String s에 있는 a~z 까지 알파벳의 갯수를 세는 알고리즘
+        HashMap<String, Integer> alphabetMap = new HashMap<>();
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("문장을 입력하시오");
+        String input = br.readLine();
+
+        for (int i = 65; i <= 90; i++) {
+            int count = 0;
+            for (int j = 0; j < input.length(); j++) {
+                if (((char)(i)+"").equalsIgnoreCase(input.charAt(j)+"")) {
+                    count += 1;
+                    alphabetMap.put((char)(i)+"", count);
+                }
+            }
+        }
+        System.out.println(alphabetMap);
+
+    }
+
+}
+
