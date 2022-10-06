@@ -27,4 +27,9 @@ public class ReadFile {
 
         return output;
     }
+
+    String readOneLine() throws IOException{
+        BufferedReader br = new BufferedReader(new FileReader(this.fileName));
+        return br.readLine();
+    }
 }
