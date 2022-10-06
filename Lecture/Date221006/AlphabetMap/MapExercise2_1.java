@@ -20,7 +20,7 @@ public class MapExercise2_1 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("문장을 입력하시오");
         String input = br.readLine();
-        for (char alphabet = 'A'; alphabet <= 'z'; alphabet++) {
+        for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
             int count = 0;
             for (int i = 0; i < input.length(); i++) {
                 if (isAlphabet(input.charAt(i)) && input.charAt(i)==alphabet) {
