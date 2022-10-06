@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class RndNumbersWithoutDuplicated {
     public static void main(String[] args) {
-        //1. 랜덤 숫자 생성 및 중복 제거
+        //1. 랜덤 숫자 생성 및 중복 제거하기
         NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
         Set<Integer> randomNumberSet = new HashSet<>();
         for (int i = 0; i < 50; i++) {
