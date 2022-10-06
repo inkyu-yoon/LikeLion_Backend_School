@@ -17,9 +17,11 @@ public class MapExercise2 {
         for (int i = 65; i <= 90; i++) {
             int count = 0;
             for (int j = 0; j < input.length(); j++) {
-                if (((char) (i) + "").equalsIgnoreCase(input.charAt(j) + "")) {
+                String alphabet = String.valueOf((char) (i));
+                String fromSentence = String.valueOf(input.charAt(j)); //equalsIgnoreCase 쓰려고 String으로 변환
+                if ((alphabet).equalsIgnoreCase(fromSentence)) {
                     count += 1;
-                    alphabetMap.put((char) (i) + "", count);
+                    alphabetMap.put(alphabet, count);
                 }
             }
         }
