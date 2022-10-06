@@ -11,7 +11,7 @@ public class ReadFile {
     private String fileName;
     private BufferedReader br;
 
-    private List<Student> studentList;
+    List<Student> studentList;
     ReadFile(String fileName) throws IOException {
         this.fileName = fileName;
         br = new BufferedReader(new FileReader(this.fileName));
@@ -55,16 +55,18 @@ public class ReadFile {
         return count;
     }
 
-    List<Student> getAllInfo(int lineNum) throws IOException{
+    void getAllInfo() throws IOException{
         br.readLine();
-        for (int i = 0; i < lineNum; i++) {
-            String[] input = br.readLine().split(" ");
+
+        while(br.readLine() !=null){
+            String[] input = br.readLine().split("\t");
             int id = Integer.valueOf(input[0]);
             String hid = input[1];
-            int height = Integer.valueOf(input[2]);
-            studentList.add(new Student(id, hid, height));
+            double height = Double.valueOf(input[2]);
+            Student st = new Student(id, hid, height);
+            System.out.println(st);
         }
-        return studentList;
+
     }
 
 
