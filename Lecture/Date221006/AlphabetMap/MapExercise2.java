@@ -17,6 +17,9 @@ public class MapExercise2 {
         for (int i = 65; i <= 90; i++) {
             int count = 0;
             for (int j = 0; j < input.length(); j++) {
+                //알파벳 'a'랑 문장 전체 문자비교 후 카운팅 숫자 입력
+                // 다음 루프 'b'랑 문장 전체 문자 비교 후 카운팅 숫자 입력
+                //....마지막 루프 'z'랑 문장 전체 문자 비교 후 카운팅 숫자 입력
                 String alphabet = String.valueOf((char) (i));
                 String fromSentence = String.valueOf(input.charAt(j)); //equalsIgnoreCase 쓰려고 String으로 변환
                 if ((alphabet).equalsIgnoreCase(fromSentence)) {
@@ -26,19 +29,12 @@ public class MapExercise2 {
             }
         }
 //        System.out.println(alphabetMap);
-        for (String s : alphabetMap.keySet()) {
-            int value = alphabetMap.get(s);
-            System.out.println(s + " = " + value);
+        for (String key : alphabetMap.keySet()) {
+            int value = alphabetMap.get(key);
+            System.out.println(key + " = " + value);
         }
 
 
-    }
-
-    static boolean isAlphabet(char input) {
-        if (((input >= 'a') && (input <= 'z')) || ((input >= 'A') && (input <= 'Z'))) {
-            return true;
-        }
-        return false;
     }
 }
 
