@@ -57,9 +57,9 @@ public class ReadFile {
 
     void getAllInfo() throws IOException{
         br.readLine();
-
-        while(br.readLine() !=null){
-            String[] input = br.readLine().split("\t");
+        String str;
+        while((str=br.readLine()) !=null){
+            String[] input = str.split("\t");
             int id = Integer.valueOf(input[0]);
             String hid = input[1];
             double height = Double.valueOf(input[2]);
