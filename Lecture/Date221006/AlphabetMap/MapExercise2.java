@@ -17,13 +17,17 @@ public class MapExercise2 {
         for (int i = 65; i <= 90; i++) {
             int count = 0;
             for (int j = 0; j < input.length(); j++) {
-                if (((char)(i)+"").equalsIgnoreCase(input.charAt(j)+"")) {
+                if (((char) (i) + "").equalsIgnoreCase(input.charAt(j) + "")) {
                     count += 1;
-                    alphabetMap.put((char)(i)+"", count);
+                    alphabetMap.put((char) (i) + "", count);
                 }
             }
         }
-        System.out.println(alphabetMap);
+//        System.out.println(alphabetMap);
+        for (String s : alphabetMap.keySet()) {
+            int value = alphabetMap.get(s);
+            System.out.println(s + " = " + value);
+        }
 
     }
 
