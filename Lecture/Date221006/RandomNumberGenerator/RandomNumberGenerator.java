@@ -1,4 +1,4 @@
-package Lecture.Date221006;
+package Lecture.Date221006.RandomNumberGenerator;
 
 public class RandomNumberGenerator implements NumberGenerator{
     @Override

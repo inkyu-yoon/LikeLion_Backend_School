@@ -1,6 +1,4 @@
-package Lecture.Date221006;
-
-import Lecture.Date221005.NumberCreator.RandomNumberCreator;
+package Lecture.Date221006.RandomNumberGenerator;
 
 import java.util.HashSet;
 import java.util.Set;
