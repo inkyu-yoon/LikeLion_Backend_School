@@ -5,7 +5,8 @@ import java.util.Set;
 
 public class RndNumbersWithoutDuplicated {
     public static void main(String[] args) {
-        RandomNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        NumberGenerator randomNumberGenerator = new RandomNumberGenerator();
+        NumberGenerator randomAlphabetGenerator = new RandomAlphabetGenerator();
         Set<Integer> randomNumberSet = new HashSet<>();
         for (int i = 0; i < 50; i++) {
             int r = randomNumberGenerator.generate(10);
@@ -13,6 +14,17 @@ public class RndNumbersWithoutDuplicated {
         }
         for (Integer integer : randomNumberSet) {
             System.out.println(integer);
+        }
+
+        Set<Character> randomAlphabetSet = new HashSet<>();
+        for (int i = 0; i < 50; i++) {
+            int r = randomAlphabetGenerator.generate(26);
+            System.out.println("(char)r = " + (char)r);
+            randomAlphabetSet.add((char)r);
+        }
+
+        for (Character character : randomAlphabetSet) {
+            System.out.print(character);
         }
     }
 }
