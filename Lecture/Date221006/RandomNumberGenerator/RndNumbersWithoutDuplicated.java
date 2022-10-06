@@ -17,7 +17,7 @@ public class RndNumbersWithoutDuplicated {
         for (Integer integer : randomNumberSet) {
             System.out.print(integer + " ");
         }
-
+        System.out.println();
         //2. 랜덤 알파벳 생성 및 중복 제거
         NumberGenerator randomAlphabetGenerator = new RandomAlphabetGenerator();
         Set<Character> randomAlphabetSet = new HashSet<>();
