@@ -31,7 +31,14 @@ public class MapExercise2 {
             System.out.println(s + " = " + value);
         }
 
+
     }
 
+    static boolean isAlphabet(char input){
+        if(((input>='a')&&(input<='z'))||((input>='A')&&(input<='Z'))){
+            return true;
+        }
+        return false;
+    }
 }
 
