@@ -22,9 +22,9 @@ public class RndNumbersWithoutDuplicated {
             System.out.println("(char)r = " + (char)r);
             randomAlphabetSet.add((char)r);
         }
-
+        System.out.println("============결과============");
         for (Character character : randomAlphabetSet) {
-            System.out.print(character);
+            System.out.print(character+" ");
         }
     }
 }
