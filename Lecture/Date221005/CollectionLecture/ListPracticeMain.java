@@ -9,10 +9,10 @@ public class ListPracticeMain {
         List<Student> studentObjs = likeLion2th.getStudentsObjsList();
 
 
-        for (Student studentobjs : studentObjs) {
-            System.out.println(studentobjs);
+        for (Student studentObj : studentObjs) {
+            System.out.println(studentObj);
         }
-        System.out.println(studentObjs.size());
+        System.out.println("데이터의 갯수는 : " + studentObjs.size());
 
     }
 }
