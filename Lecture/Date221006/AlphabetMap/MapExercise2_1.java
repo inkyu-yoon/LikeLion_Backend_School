@@ -23,7 +23,7 @@ public class MapExercise2_1 {
         for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
             int count = 0;
             for (int i = 0; i < input.length(); i++) {
-                if (isAlphabet(input.charAt(i)) && String.valueOf(input.charAt(i)).toUpperCase().equals(alphabet+"")) {
+                if (isAlphabet(input.charAt(i)) && String.valueOf(input.charAt(i)).equalsIgnoreCase(alphabet+"")) {
                     alphabetMap.put(String.valueOf(alphabet).toUpperCase(), ++count);
                 }
             }
