@@ -16,12 +16,15 @@ public class ReadFile {
         return (char)br.read();
     }
     String readNWord(int N) throws IOException {
-        //지정한 파일의 맨 앞 한 byte를 읽어오는 메서드를 만들기
+
         BufferedReader br = new BufferedReader(new FileReader(this.fileName));
+
         String output ="";
+
         for (int i = 0; i < N; i++) {
             output+=(char)(br.read());
         }
+
         return output;
     }
 }
