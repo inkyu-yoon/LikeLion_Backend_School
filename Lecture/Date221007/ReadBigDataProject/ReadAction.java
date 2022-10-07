@@ -50,7 +50,7 @@ public class ReadAction {
         //아래는 데이터 출력 과정
 
         for (int k = 0; k < code.length; k++) {
-            System.out.println(codeName[k] + " 값은 " + countMap.get(code[k]) + " 입니다.");
+            System.out.println(codeName[k]+"("+code[k]+") " + " 값은 " + countMap.get(code[k]) + "명(개) 입니다.");
         }
 
     }
