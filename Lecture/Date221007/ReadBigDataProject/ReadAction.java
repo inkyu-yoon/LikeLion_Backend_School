@@ -48,10 +48,14 @@ public class ReadAction {
         }
 
         //아래는 데이터 출력 과정
-
+        int maxIndex =0;
         for (int k = 0; k < code.length; k++) {
             System.out.println(codeName[k]+"("+code[k]+") " + " 값은 " + countMap.get(code[k]) + "명(개) 입니다.");
+            if(countMap.get(code[k])>countMap.get(code[maxIndex])){
+                maxIndex = k;
+            }
         }
-
+        System.out.println();
+        System.out.println("최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.");
     }
 }
