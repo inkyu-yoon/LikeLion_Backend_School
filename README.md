@@ -156,9 +156,9 @@ split() 메서드를 사용해서, 입력되는 한 라인 마다 키 값에 해
 
 ---
 
-[히트맵 데이터 결과물]()
+[히트맵 데이터 결과물](https://github.com/inkyu-yoon/LikeLion_Backend_School/blob/main/for_heatmap.txt)
 
-[행정명 번역 결과물]()
+[행정명 번역 결과물](https://github.com/inkyu-yoon/LikeLion_Backend_School/blob/main/for_translate.txt)
 
 [생성한 히트맵 주소](https://jsfiddle.net/5nbo8dpy/)
 
