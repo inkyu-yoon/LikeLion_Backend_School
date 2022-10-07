@@ -9,107 +9,15 @@ public class PopulationStatistics {
         ReadAction readAction = new ReadAction("./BigDataRepository.csv");
 //        readAction.readOneLine();
 //        readAction.readNLine(10);
-        readAction.getAllInfo();
-//        readAction.getDataMap();
+//        readAction.getAllInfo();
+        readAction.getDataMap();
     }
 }
 /*
 출력화면
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=30}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=28}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=26}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=48}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=42}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=44}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=42}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=28}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=26}
-DataInfo{inCity=50, outCity=27}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=44}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=44}
-DataInfo{inCity=50, outCity=30}
-DataInfo{inCity=50, outCity=47}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=44}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=43}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=26}
-DataInfo{inCity=50, outCity=46}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=28}
-DataInfo{inCity=50, outCity=48}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=28}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=11}
-DataInfo{inCity=50, outCity=27}
-DataInfo{inCity=50, outCity=41}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-DataInfo{inCity=50, outCity=50}
-.... 100만개
+
+=========Show Data===========
+{32=0, 33=0, 34=0, 35=0, 36=49219, 37=0, 38=0, 39=0, 11=1227491, 21=0, 22=0, 23=0, 24=0, 25=0, 26=403502, 29=183625, 31=127846}
+{32=0, 33=0, 34=0, 35=0, 36=57000, 37=0, 38=0, 39=0, 11=1189998, 21=0, 22=0, 23=0, 24=0, 25=0, 26=388869, 29=179158, 31=118237}
+
  */
