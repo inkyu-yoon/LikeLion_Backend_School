@@ -9,14 +9,14 @@ public class PopulationStatistics {
         int[] cityCode = {11, 21, 22, 23, 24, 25, 26, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39};
         String[] cityName = {"서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기도", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};
 
-        //빅데이터의 알고싶은 코드의 *인덱스*와, 각 *코드*가 *의미하는 내용*이 뭔지 입력하면 출력할 수 있음.
+        //빅데이터의 알고싶은 코드의 *인덱스*와, 각 *코드*가 *의미하는 내용*에 대한 배열을 입력하면 출력할 수 있음.
         //자유롭게 정보 출력 가능 -> 조금 더더 객체지향적으로도 만들 수는 있을 듯....?
 
         System.out.println();
         System.out.println();
         System.out.println("=======전입 데이터를 표시합니다.========");
         readAction.getBigDataWithIndex(cityCode,cityName,0);
-
+        // ↑ 알고싶은 인덱스는 0번째 인덱스, 해당 인덱스의 데이터에 대한 정보 배열 입력
 
         System.out.println();
         System.out.println();
