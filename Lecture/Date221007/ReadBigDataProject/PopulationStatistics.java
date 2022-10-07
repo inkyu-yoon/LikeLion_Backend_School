@@ -4,8 +4,20 @@ import java.io.IOException;
 
 public class PopulationStatistics {
     public static void main(String[] args) throws IOException {
+        int[] cityCode = {11, 21, 22, 23, 24, 25, 26, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39};
+        String[] cityName = {"서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기도", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};
+
         ReadAction readAction = new ReadAction("./BigDataRepository.csv");
-        readAction.getDataInAndOut();
+        System.out.println();
+        System.out.println();
+        System.out.println("=======전입 데이터를 표시합니다.========");
+        readAction.getDataInAndOut(cityCode,cityName,0);
+
+
+        System.out.println();
+        System.out.println();
+        System.out.println("=======전출 데이터를 표시합니다.========");
+        readAction.getDataInAndOut(cityCode,cityName,6);
     }
 }
 /*

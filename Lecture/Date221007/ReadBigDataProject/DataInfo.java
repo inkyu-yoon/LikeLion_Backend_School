@@ -1,8 +1,14 @@
 package Lecture.Date221007.ReadBigDataProject;
 
 public class DataInfo {
+
     private int inCity; //1번째 2개의 데이터
     private int outCity; //7번째 2개의 데이터
+
+
+    DataInfo() {
+        }
+
 
     public int getInCity() {
         return inCity;
