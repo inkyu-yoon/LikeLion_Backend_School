@@ -1,6 +1,7 @@
 package Lecture.Date221007.ReadBigDataProject;
 
 import java.io.*;
+import java.util.Map;
 
 public class PopulationStatistics {
     static void createAFile(String filename) throws IOException {
@@ -9,7 +10,8 @@ public class PopulationStatistics {
     }
 
     public static void main(String[] args) throws IOException {
-        ReadAction readAction = new ReadAction("./BigDataRepository.csv");
+        ReadAction readAction1 = new ReadAction("./BigDataRepository.csv");
+        ReadAction readAction2 = new ReadAction("./BigDataRepository.csv");
 
         int[] cityCode = {11, 21, 22, 23, 24, 25, 26, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39};
         String[] cityName = {"서울", "부산", "대구", "인천", "광주", "대전", "울산", "세종", "경기도", "강원도", "충북", "충남", "전북", "전남", "경북", "경남", "제주"};
@@ -20,12 +22,10 @@ public class PopulationStatistics {
         StringBuilder sb2 = new StringBuilder();
 
 
-        System.out.printf("\n=======전입 데이터를 표시합니다.========\n");
-        sb1=readAction.getBigDataWithIndex(cityCode, cityName, 0);
+        sb1=readAction1.getBigDataWithIndex(cityCode, cityName, 0);
         // ↑ 알고싶은 인덱스는 0번째 인덱스, 해당 인덱스의 데이터에 대한 정보 배열 입력
 
-        System.out.printf("\n=======전출 데이터를 표시합니다.========\n");
-        sb2=readAction.getBigDataWithIndex(cityCode, cityName, 6);
+        sb2=readAction2.getBigDataWithIndex(cityCode, cityName, 6);
 
         String writeFileName = "from_to.txt";
         createAFile(writeFileName); //"텍스트 파일 생성"
@@ -34,6 +34,17 @@ public class PopulationStatistics {
 
         bw.write(sb1.append(sb2).toString());
         bw.close();
+        //텍스트 파일에 정보 저장 완료.
+
+
+
+        MapData map1 = new MapData(readAction1.getCountMap());
+        MapData map2 = new MapData(readAction2.getCountMap());
+//        map1.printInfo();
+//        map2.printInfo();
+
+        //만약 키 값이 11인 전입자 데이터를 구하고 싶다면 map1이 전입자 데이터이므로 키 값을 이용해서 찾는다.
+        System.out.println(map1.countMap.get(11));
 
     }
 }

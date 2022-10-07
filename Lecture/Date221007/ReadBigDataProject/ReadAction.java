@@ -10,15 +10,19 @@ import java.util.Map;
 public class ReadAction {
     private String fileAddress;
     private BufferedReader br;
-
+    private Map<Integer, Integer> countMap;
     public ReadAction(String fileAddress) throws IOException {
         this.fileAddress = fileAddress;
         br = new BufferedReader(new FileReader(fileAddress));
     }
 
+    Map<Integer,Integer> getCountMap(){
+        return countMap;
+    }
+
     StringBuilder getBigDataWithIndex(int [] code , String [] codeName, int index1) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileAddress));
-        Map<Integer, Integer> countMap = new HashMap<>();
+        countMap = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         //여기서 생기는 모든 데이터들을 StringBuilder 에 쌓아둘 것이다.
 
@@ -44,15 +48,15 @@ public class ReadAction {
         //아래는 데이터 출력 과정
         int maxIndex =0;
         for (int k = 0; k < code.length; k++) {
-            System.out.println(codeName[k]+"("+code[k]+") " + " 값은 " + countMap.get(code[k]) + "명(개) 입니다.");
+//            System.out.println(codeName[k]+"("+code[k]+") " + " 값은 " + countMap.get(code[k]) + "명(개) 입니다.");
             sb.append(codeName[k]+"("+code[k]+") " + " 값은 " + countMap.get(code[k]) + "명(개) 입니다.\n");
             if(countMap.get(code[k])>countMap.get(code[maxIndex])){
                 maxIndex = k;
             }
         }
 
-        System.out.println();
-        System.out.println("최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.");
+//        System.out.println();
+//        System.out.println("최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.");
 
         sb.append("\n최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.\n\n");
 
