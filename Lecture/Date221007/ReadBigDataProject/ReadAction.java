@@ -34,7 +34,7 @@ public class ReadAction {
 
         for (int i = 0; i < code.length; i++) {
             for(int j=0;j<code.length;j++){
-            countMap.put(code[i]+","+code[j], 0);
+                countMap.put(code[i]+","+code[j], 0);
             }
         }
         //↑ 맵(key,value) 각 키 값에 해당하는 value 값을 0으로 초기화 시키기
@@ -56,7 +56,7 @@ public class ReadAction {
         for (int k = 0; k < code.length; k++) {
             for(int l=0;l<code.length;l++){
 //            sb.append(codeName[k]+","+codeName[l]+"("+code[k]+","+code[l]+") " + " 값은 " + countMap.get(code[k]+","+code[l]) + "명(개) 입니다.\n");
-            sb.append("["+(k)+", "+(l)+", " + countMap.get(code[k]+","+code[l]) + "],\n");
+                sb.append("["+(k)+", "+(l)+", " + countMap.get(code[k]+","+code[l]) + "],\n");
 
             }
         }

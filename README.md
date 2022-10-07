@@ -162,6 +162,11 @@ split() 메서드를 사용해서, 입력되는 한 라인 마다 키 값에 해
 
 [생성한 히트맵 주소](https://jsfiddle.net/5nbo8dpy/)
 
+
+[소스코드](https://github.com/inkyu-yoon/LikeLion_Backend_School/tree/main/Lecture/Date221007/ReadBigDataProject)
+
+
+
 ![image](https://user-images.githubusercontent.com/110657129/194511616-961643e2-cb30-4bd5-9683-3aac9b65a604.png)
 
 </details>
