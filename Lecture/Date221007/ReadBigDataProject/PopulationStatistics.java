@@ -19,27 +19,20 @@ public class PopulationStatistics {
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
 
-        System.out.println();
-        System.out.println();
-        System.out.println("=======전입 데이터를 표시합니다.========");
+
+        System.out.printf("\n=======전입 데이터를 표시합니다.========\n");
         sb1=readAction.getBigDataWithIndex(cityCode, cityName, 0);
         // ↑ 알고싶은 인덱스는 0번째 인덱스, 해당 인덱스의 데이터에 대한 정보 배열 입력
 
-        System.out.println();
-        System.out.println();
-        System.out.println("=======전출 데이터를 표시합니다.========");
+        System.out.printf("\n=======전출 데이터를 표시합니다.========\n");
         sb2=readAction.getBigDataWithIndex(cityCode, cityName, 6);
 
         String writeFileName = "from_to.txt";
-
         createAFile(writeFileName); //"텍스트 파일 생성"
-
         BufferedWriter bw = new BufferedWriter(new FileWriter(new File(writeFileName)));
         //파일 경로 지정, 이제 bw.write 로 써주기만 하면 됨
 
-
-        bw.write(sb1.toString());
-        bw.write(sb2.toString());
+        bw.write(sb1.append(sb2).toString());
         bw.close();
 
     }

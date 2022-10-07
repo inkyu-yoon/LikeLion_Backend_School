@@ -16,18 +16,12 @@ public class ReadAction {
         br = new BufferedReader(new FileReader(fileAddress));
     }
 
-    void readAllLine() throws IOException {
-        System.out.println();
-        System.out.println("=========Show Data===========");
-        String str = "";
-        while ((str = br.readLine()) != null) {
-            System.out.println(str);
-        }
-    }
     StringBuilder getBigDataWithIndex(int [] code , String [] codeName, int index1) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileAddress));
         Map<Integer, Integer> countMap = new HashMap<>();
         StringBuilder sb = new StringBuilder();
+        //여기서 생기는 모든 데이터들을 StringBuilder 에 쌓아둘 것이다.
+
         sb.append("\n\n");
 
         for (int i = 0; i < code.length; i++) {
@@ -45,7 +39,6 @@ public class ReadAction {
             if (countMap.get(info) != null) { //null 값이 아닌 경우에만 해당 행정구역의 value 값을 1 증가 시킴
                 countMap.put(info, countMap.get(info) + 1);
             }
-
         }
 
         //아래는 데이터 출력 과정
@@ -57,9 +50,11 @@ public class ReadAction {
                 maxIndex = k;
             }
         }
+
         System.out.println();
         System.out.println("최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.");
-        sb.append("\n\n최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.");
+
+        sb.append("\n최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.\n\n");
 
         return sb;
         //모든 내용들이 StringBuilder 에 저장되어 반환된다.
