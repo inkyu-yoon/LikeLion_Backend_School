@@ -3,8 +3,8 @@ package Lecture.Date221007.ReadBigDataProject;
 import java.util.Map;
 
 public class MapData {
-    Map<Integer, Integer> countMap;
-    MapData( Map<Integer, Integer> countMap){
+    Map<String, Integer> countMap;
+    MapData( Map<String, Integer> countMap){
         this.countMap = countMap;
     }
 
