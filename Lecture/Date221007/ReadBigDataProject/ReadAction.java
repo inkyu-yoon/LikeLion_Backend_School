@@ -24,10 +24,11 @@ public class ReadAction {
             System.out.println(str);
         }
     }
-
-    void getBigDataWithIndex(int [] code , String [] codeName, int index1) throws IOException {
+    StringBuilder getBigDataWithIndex(int [] code , String [] codeName, int index1) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileAddress));
         Map<Integer, Integer> countMap = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\n");
 
         for (int i = 0; i < code.length; i++) {
             countMap.put(code[i], 0);
@@ -51,11 +52,21 @@ public class ReadAction {
         int maxIndex =0;
         for (int k = 0; k < code.length; k++) {
             System.out.println(codeName[k]+"("+code[k]+") " + " 값은 " + countMap.get(code[k]) + "명(개) 입니다.");
+            sb.append(codeName[k]+"("+code[k]+") " + " 값은 " + countMap.get(code[k]) + "명(개) 입니다.\n");
             if(countMap.get(code[k])>countMap.get(code[maxIndex])){
                 maxIndex = k;
             }
         }
         System.out.println();
         System.out.println("최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.");
+        sb.append("\n\n최댓값은 "+codeName[maxIndex]+"("+code[maxIndex]+") " + "" + countMap.get(code[maxIndex]) + "명(개) 입니다.");
+
+        return sb;
+        //모든 내용들이 StringBuilder 에 저장되어 반환된다.
     }
+
+
+
+
+
 }
