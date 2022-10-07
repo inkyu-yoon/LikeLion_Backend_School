@@ -1,10 +1,9 @@
 package Lecture.Date221007.ReadBigDataProject;
 
-import javax.xml.crypto.Data;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,20 +14,6 @@ public class ReadAction {
     public ReadAction(String fileAddress) throws IOException {
         this.fileAddress = fileAddress;
         br = new BufferedReader(new FileReader(fileAddress));
-    }
-
-    void readOneLine() throws IOException {
-        System.out.println();
-        System.out.println("=========Show Data===========");
-        System.out.println(br.readLine());
-    }
-
-    void readNLine(int N) throws IOException {
-        System.out.println();
-        System.out.println("=========Show Data===========");
-        for (int i = 1; i <= N; i++) {
-            System.out.println(br.readLine());
-        }
     }
 
     void readAllLine() throws IOException {
@@ -44,14 +29,10 @@ public class ReadAction {
         BufferedReader br = new BufferedReader(new FileReader(fileAddress));
         Map<Integer, Integer> countMap = new HashMap<>();
 
-        DataInfo dataInfo = new DataInfo();
-
-
         for (int i = 0; i < code.length; i++) {
             countMap.put(code[i], 0);
         }
         //맵(key,value) 각 키 값에 해당하는 value 값을 0으로 초기화 시키기
-
 
         String oneLineFromBigData = "";
 
@@ -68,9 +49,8 @@ public class ReadAction {
 
         //아래는 데이터 출력 과정
 
-
         for (int k = 0; k < code.length; k++) {
-            System.out.println(codeName[k] + " 값은 " + countMap.get(code[k]) + " 명이 전입했습니다.");
+            System.out.println(codeName[k] + " 값은 " + countMap.get(code[k]) + " 입니다.");
         }
 
     }
