@@ -20,13 +20,14 @@ public class ReadAction {
         return countMap;
     }
 
-    StringBuilder getBigDataWithIndex(int [] code , String [] codeName, int index1) throws IOException {
+    StringBuilder getBigDataWithIndex(int [] code , String [] codeName, int index) throws IOException {
+
         BufferedReader br = new BufferedReader(new FileReader(fileAddress));
         countMap = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         //여기서 생기는 모든 데이터들을 StringBuilder 에 쌓아둘 것이다.
 
-        sb.append("\n\n");
+        sb.append("\n\n데이터의 "+index+"번째 인덱스 데이터 입니다.\n\n");
 
         for (int i = 0; i < code.length; i++) {
             countMap.put(code[i], 0);
@@ -37,7 +38,7 @@ public class ReadAction {
 
         while ((oneLineFromBigData = br.readLine()) != null) { //읽어온 데이터가 null 값이 되면, 데이터가 더이상 없다는 것
             String[] input = oneLineFromBigData.split(","); // ',' 를 기준으로 데이터를 나누고 String 배열에 입력
-            int info = Integer.valueOf(input[index1]); //첫번째 데이터가 전입 행정구역 코드
+            int info = Integer.valueOf(input[index]); //첫번째 데이터가 전입 행정구역 코드
 
 
             if (countMap.get(info) != null) { //null 값이 아닌 경우에만 해당 행정구역의 value 값을 1 증가 시킴
