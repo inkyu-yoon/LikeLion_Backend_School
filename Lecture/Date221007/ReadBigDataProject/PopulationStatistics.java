@@ -11,13 +11,13 @@ public class PopulationStatistics {
         System.out.println();
         System.out.println();
         System.out.println("=======전입 데이터를 표시합니다.========");
-        readAction.getDataInAndOut(cityCode,cityName,0);
+        readAction.getBigDataWithIndex(cityCode,cityName,0);
 
 
         System.out.println();
         System.out.println();
         System.out.println("=======전출 데이터를 표시합니다.========");
-        readAction.getDataInAndOut(cityCode,cityName,6);
+        readAction.getBigDataWithIndex(cityCode,cityName,6);
     }
 }
 /*

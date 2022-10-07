@@ -25,7 +25,7 @@ public class ReadAction {
         }
     }
 
-    void getDataInAndOut(int [] code , String [] codeName,int index1) throws IOException {
+    void getBigDataWithIndex(int [] code , String [] codeName, int index1) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileAddress));
         Map<Integer, Integer> countMap = new HashMap<>();
 
