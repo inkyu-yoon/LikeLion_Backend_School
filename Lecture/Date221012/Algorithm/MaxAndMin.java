@@ -1,24 +1,24 @@
 package Lecture.Date221012.Algorithm;
 
 interface Compare {
-    boolean doSomething(int valueA, int valueB);
+    boolean action(int valueA, int valueB);
 }
 public class MaxAndMin {
     private int getMaxOrMinValue(int[] arr,Compare compare) {
-        int targetValue = arr[0];
+        int comparedValue = arr[0];
         for (int i = 1; i < arr.length; i++) {
-            boolean isSth = compare.doSomething(arr[i],targetValue);
-            if (isSth) {
-                targetValue = arr[i];
+            boolean isSatisfy = compare.action(arr[i],comparedValue);
+            if (isSatisfy) {
+                comparedValue = arr[i];
             }
         }
-        return targetValue;
+        return comparedValue;
     }
 
     public int max(int[] arr) {
         return getMaxOrMinValue(arr, new Compare() {
             @Override
-            public boolean doSomething(int valueA, int valueB) {
+            public boolean action(int valueA, int valueB) {
                 return valueA > valueB;
             }
         });
@@ -27,7 +27,7 @@ public class MaxAndMin {
     public int min(int[] arr) {
         return getMaxOrMinValue(arr, new Compare() {
             @Override
-            public boolean doSomething(int valueA, int valueB) {
+            public boolean action(int valueA, int valueB) {
                 return valueA < valueB;
             }
         });
