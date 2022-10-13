@@ -20,7 +20,7 @@ public class HospitalParser implements Parser<Hospital> {
         int emergencyRoom = Integer.valueOf(rmQM(oneLine[6])); //응급 유무는 7번째 데이터, int형으로 변환하여 받음
 
         String checkSub = rmQM(oneLine[8]); // 7번째 비고란을 통해서 약간의 분류를 한다.
-        String subdivision = makeSub(checkSub, name);
+        String subdivision = makeSub(str);
         //makeSub 메서드를 통해 병원 유형이 "치과" 나 "한의원" 을 비고란에 추가
         // 만약 비고란에 "소아", "외과" , "피부" , "성형" 키워드가 있다면 비고란에 추가
 
@@ -32,13 +32,10 @@ public class HospitalParser implements Parser<Hospital> {
         return input.substring(1, input.length() - 1);
     } //replace를 쓰면 데이터 내부에 있는 혹시 모를 " 가 수정될 수 있기 때문에 substring 방식을 사용하였다.
 
-    public String makeSub(String input, String name) { //비고란 채우기 메서드
+    public String makeSub(String oneLine) { //비고란 채우기 메서드
         String result = "";
-        String[] nameCheck = {"치과", "한의원", "요양", "한방", "종합"};
-        String[] inputCheck = {"외과", "소아", "피부", "성형", "척추", "교정", "산부인과", "관절", "봉합", "화상", "골절", "내과", "영유아", "안과"};
-        result += isContains(name, nameCheck);
-        result += isContains(input, inputCheck);
-
+        String[] subCheck = {"치과", "한의원", "요양", "한방", "종합","외과", "소아", "피부", "성형", "척추", "교정", "산부인과", "관절", "봉합", "화상", "골절", "내과", "영유아", "안과"};
+        result += isContains(oneLine, subCheck);
 
         return result;
     }
