@@ -10,3 +10,4 @@ public class No_1060 {
         System.out.println(a&b);
     }
 }
+
