@@ -21,5 +21,8 @@ class HospitalParserTest {
         Assertions.assertEquals('C', hospital.getCategory());
         Assertions.assertEquals("연세정소아과의원", hospital.getName());
         Assertions.assertEquals(2, hospital.getEmergencyRoom());
+
+        Hospital hospital1 = new Hospital("A1106786", "서울특별시 송파구 동남로 208 (가락동)");
+        Assertions.assertEquals(hospital1.getAddress(),hospital.getAddress());
     }
 }

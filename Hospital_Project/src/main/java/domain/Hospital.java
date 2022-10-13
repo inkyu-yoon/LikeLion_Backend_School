@@ -44,6 +44,11 @@ public class Hospital {
                 "\'"+ emergencyRoom +"\',"+ "\'"+ name +"\'," + "\'"+ subdivision +"\'"+ ")";
     }
 
+    public Hospital(String id, String address) {
+        this.id = id;
+        this.address = address;
+    }
+
     public Hospital(String id, String address, String district, char category, int emergencyRoom, String name, String subdivision) {
         this.id = id;
         this.address = address;
