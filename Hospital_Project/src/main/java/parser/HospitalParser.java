@@ -30,7 +30,7 @@ public class HospitalParser implements Parser<Hospital> {
 
     public String rmQM(String input) { //데이터에 "" 큰따옴표가 있어서 제거하는 작업
         return input.substring(1, input.length() - 1);
-    }
+    } //replace를 쓰면 데이터 내부에 있는 혹시 모를 " 가 수정될 수 있기 때문에 substring 방식을 사용하였다.
 
     public String makeSub(String input, String name) { //비고란 채우기 메서드
         String result = "";
