@@ -17,3 +17,4 @@ public class No_1066 {
         }
     }
 }
+

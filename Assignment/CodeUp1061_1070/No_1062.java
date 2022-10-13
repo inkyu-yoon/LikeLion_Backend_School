@@ -10,3 +10,4 @@ public class No_1062 {
         System.out.println(a^b);
     }
 }
+

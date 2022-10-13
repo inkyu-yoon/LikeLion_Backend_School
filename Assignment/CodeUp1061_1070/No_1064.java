@@ -11,3 +11,4 @@ public class No_1064 {
         System.out.println(a<b?(a<c?a:c):(b<c?b:c));
     }
 }
+
