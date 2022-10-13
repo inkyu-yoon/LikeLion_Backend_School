@@ -2,7 +2,7 @@ package Lecture.Date221013.Bubble;
 
 import java.util.Arrays;
 
-public class Main {
+public class BubbleMain {
     public static void main(String[] args) {
         int[] arr = {8,7,6,5,4,3,1,7};
         bubbleSort(arr);
