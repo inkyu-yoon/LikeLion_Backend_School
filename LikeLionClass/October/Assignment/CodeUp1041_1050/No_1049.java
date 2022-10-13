@@ -1,0 +1,13 @@
+package October.Assignment.CodeUp1041_1050;
+
+import java.util.Scanner;
+
+public class No_1049 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        if(a>b) System.out.println(1);
+        else System.out.println(0);
+    }
+}
