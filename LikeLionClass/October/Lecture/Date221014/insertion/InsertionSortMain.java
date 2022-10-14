@@ -6,11 +6,41 @@ public class InsertionSortMain {
     public static void main(String[] args) {
         int[] arr = {8, 5, 6, 2, 4};
 
-        arr = insertionSort(arr);
+        arr = insertionSort(arr, 1);
 
         System.out.println(Arrays.toString(arr));
 
     }
+
+    private static int[] insertionSort(int[] arr, int i) {
+        if (i == arr.length) {
+            return arr;
+        }
+        System.out.println("Loop = " + i);
+        System.out.println("정렬 전 ");
+        System.out.println(Arrays.toString(arr));
+        System.out.println("===================");
+        for (int j = i; j >= 1; j--) {
+            if (arr[j] < arr[j - 1]) {
+                swap(arr, j, j - 1);
+            System.out.println("arr[" + (j - 1) + "] 과 arr[" + (j) + "]" + "교환  ||  " + arr[j - 1] + " vs " + arr[(j)]);
+            }
+            System.out.println(Arrays.toString(arr));
+        }
+        System.out.println();
+
+        insertionSort(arr, i + 1);
+        return arr;
+    }
+
+    private static int[] swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+        return arr;
+    }
+}
+
 
     /* 출력화면
 i = 1  ||  arr[0] vs arr[1]  ||  5 vs 8
@@ -44,24 +74,3 @@ Process finished with exit code 0
 
 
      */
-    private static int[] insertionSort(int[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            for (int j = i; j >= 1; j--) {
-                if (arr[j] < arr[j - 1]) {
-                    swap(arr, j, j - 1);
-                }
-                System.out.println("i = " + i + "  ||  arr[" + (j - 1) + "] vs arr[" + (j) + "]" + "  ||  " + arr[j - 1] + " vs " + arr[(j)]);
-                System.out.println(Arrays.toString(arr));
-            }
-            System.out.println();
-        }
-        return arr;
-    }
-
-    private static int[] swap(int[] arr, int i, int j) {
-        int tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-        return arr;
-    }
-}
