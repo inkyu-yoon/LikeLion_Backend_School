@@ -79,6 +79,7 @@ public class UserDao {
         ps.setString(1, id);
         ResultSet resultSet = ps.executeQuery();
 
+        //먼저 next() 를 사용해서 읽어들일 데이터가 있나 없나 확인하는 용도
         resultSet.next();
         System.out.printf("id : %s, name : %s, password : %s\n",
                 resultSet.getString("id"),
