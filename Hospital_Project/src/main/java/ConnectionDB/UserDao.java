@@ -38,9 +38,9 @@ public class UserDao {
     public void add() throws SQLException, ClassNotFoundException {
 
         PreparedStatement ps = conn.prepareStatement("INSERT INTO users(id,name,password) VALUES(?,?,?)");
-        ps.setString(1, "1");
-        ps.setString(2, "inkyu");
-        ps.setString(3, "1123");
+        ps.setString(1, "2");
+        ps.setString(2, "Yoon");
+        ps.setString(3, "1124");
 
 
         ps.executeUpdate();
@@ -53,18 +53,18 @@ public class UserDao {
     public void select() throws ClassNotFoundException, SQLException {
 
 
-        ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+//        ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
 
-        ps.setString(1,"1");
-
+        // 모든 데이터 조회하기
+        ps = conn.prepareStatement("SELECT * FROM users ");
         ResultSet resultSet = ps.executeQuery();
 
-        resultSet.next();
-
-        System.out.printf("id : %s, name : %s, password : %s\n",
-                resultSet.getString("id"),
-                resultSet.getString("name"),
-                resultSet.getString("password"));
+        while(resultSet.next()) {
+            System.out.printf("id : %s, name : %s, password : %s\n",
+                    resultSet.getString("id"),
+                    resultSet.getString("name"),
+                    resultSet.getString("password"));
+        }
 
     }
 
@@ -74,3 +74,9 @@ public class UserDao {
         userDao.select();
     }
 }
+/* 출력화면
+
+id : 1, name : inkyu, password : 1123
+id : 2, name : Yoon, password : 1124
+
+ */
