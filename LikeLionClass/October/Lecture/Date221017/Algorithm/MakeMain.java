@@ -11,5 +11,30 @@ public class MakeMain {
         constructor.print(n,'*');
         constructor.print(n,'#');
         constructor.print(n,'@');
+        Constructor constructor1 = new PyramidConstructor();
+        constructor1.print(n,'@');
     }
 }
+/* 출력화면
+
+*
+* *
+* * *
+* * * *
+#
+# #
+# # #
+# # # #
+@
+@ @
+@ @ @
+@ @ @ @
+   @
+  @ @
+ @ @ @
+@ @ @ @
+
+Process finished with exit code 0
+
+
+ */
