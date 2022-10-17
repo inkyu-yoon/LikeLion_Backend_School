@@ -59,7 +59,7 @@ public class UserDao {
         ps = conn.prepareStatement("SELECT * FROM users ");
         ResultSet resultSet = ps.executeQuery();
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             System.out.printf("id : %s, name : %s, password : %s\n",
                     resultSet.getString("id"),
                     resultSet.getString("name"),
@@ -68,15 +68,37 @@ public class UserDao {
 
     }
 
+    //특정 id 매개변수로 검색
+    public void select(String id) throws ClassNotFoundException, SQLException {
+
+
+//        ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+
+        // 모든 데이터 조회하기
+        ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+        ps.setString(1, id);
+        ResultSet resultSet = ps.executeQuery();
+
+        resultSet.next();
+        System.out.printf("id : %s, name : %s, password : %s\n",
+                resultSet.getString("id"),
+                resultSet.getString("name"),
+                resultSet.getString("password"));
+
+
+    }
+
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         UserDao userDao = new UserDao();
 //        userDao.add();
         userDao.select();
+        userDao.select("2");
     }
 }
 /* 출력화면
 
 id : 1, name : inkyu, password : 1123
+id : 2, name : Yoon, password : 1124
 id : 2, name : Yoon, password : 1124
 
  */
