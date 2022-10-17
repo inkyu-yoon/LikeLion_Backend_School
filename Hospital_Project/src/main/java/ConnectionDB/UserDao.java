@@ -29,8 +29,8 @@ public class UserDao {
         dbHost = env.get("DB_HOST");
         dbUser = env.get("DB_USER");
         dbPassword = env.get("DB_PASSWORD");
-        // DB 연결 (url, ID, PW)
         conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+
     }
 
 
@@ -54,9 +54,11 @@ public class UserDao {
 
 
         ps = conn.prepareStatement("SELECT * FROM users WHERE id = ?");
+
         ps.setString(1,"1");
 
         ResultSet resultSet = ps.executeQuery();
+
         resultSet.next();
 
         System.out.printf("id : %s, name : %s, password : %s\n",
