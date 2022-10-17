@@ -32,7 +32,8 @@ public class HospitalParser implements Parser<Hospital> {
 
     public String makeSub(String oneLine) { //비고란 채우기 메서드
         String result = "";
-        String[] subCheck = {"치과", "한의원", "요양", "한방", "종합","외과", "소아", "피부", "성형", "척추", "교정", "산부인과", "관절", "봉합", "화상", "골절", "내과", "영유아", "안과"};
+        String[] subCheck = {"치과", "한의원", "요양", "한방", "종합","외과", "소아", "피부", "성형", "척추", "교정", "산부인과", "관절",
+                "봉합", "화상", "골절", "내과", "영유아", "안과","이비인후과","비뇨기과","정신과"};
         result += AddIsContains(oneLine, subCheck);
         // 읽어오는 한 라인에 위와 같은 키워드가 있다면 추가
 
