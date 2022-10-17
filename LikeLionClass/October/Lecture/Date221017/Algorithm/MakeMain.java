@@ -13,10 +13,12 @@ public class MakeMain {
         constructor.print(n,'@');
         Constructor constructor1 = new PyramidConstructor();
         constructor1.print(n,'@');
+        Constructor constructor2 = new DiamondConstructor();
+        constructor2.print(n,'$');
+
     }
 }
 /* 출력화면
-
 *
 * *
 * * *
@@ -33,8 +35,13 @@ public class MakeMain {
   @ @
  @ @ @
 @ @ @ @
-
-Process finished with exit code 0
+   $
+  $ $
+ $ $ $
+$ $ $ $
+ $ $ $
+  $ $
+   $
 
 
  */
