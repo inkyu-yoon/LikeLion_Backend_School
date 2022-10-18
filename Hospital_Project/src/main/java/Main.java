@@ -1,3 +1,5 @@
+import ConnectionDB.DoSQL;
+import ConnectionDB.Select;
 import domain.Hospital;
 import parser.HospitalParser;
 
