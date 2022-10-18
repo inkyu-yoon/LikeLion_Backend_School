@@ -15,7 +15,7 @@ public class HospitalParser implements Parser<Hospital> {
 
         String name = rmQM(oneLine[10]); // 병원 명은 11번째 데이터
 
-        char category = rmQM(oneLine[2]).charAt(0); //병원 유형은 2번째 데이터, char로 변환
+        String category = rmQM(oneLine[2]); //병원 유형은 2번째 데이터, char로 변환
 
         int emergencyRoom = Integer.valueOf(rmQM(oneLine[6])); //응급 유무는 7번째 데이터, int형으로 변환하여 받음
 
