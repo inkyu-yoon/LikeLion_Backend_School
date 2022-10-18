@@ -59,4 +59,5 @@ public class Hospital {
         this.name = name;
         this.subdivision = subdivision;
     }
+
 }
