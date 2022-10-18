@@ -22,16 +22,19 @@ public class HospitalDao {
     //DB_USER = root
     //DB_PASSWORD = 패스워드
     private Map<String, String> env;
-    private String dbHost, dbUser, dbPassword;
+
     private Connection conn;
     private PreparedStatement ps;
 
+    private Connection makeConnection() throws SQLException {
+
+        return DriverManager.getConnection(env.get("DB_HOST"), env.get("DB_USER"), env.get("DB_PASSWORD"));
+
+    }
+
     public HospitalDao() throws SQLException {
         env = System.getenv();
-        dbHost = env.get("DB_HOST");
-        dbUser = env.get("DB_USER");
-        dbPassword = env.get("DB_PASSWORD");
-        conn = DriverManager.getConnection(dbHost, dbUser, dbPassword);
+        this.conn = makeConnection();
     }
 
 
@@ -52,13 +55,12 @@ public class HospitalDao {
 
         ps.executeUpdate();
         ps.close();
-        conn.close();
+
         System.out.println("DB insert 완료 되었습니다.");
 
     }
 
     public void select() throws ClassNotFoundException, SQLException {
-
 
         // 모든 데이터 조회하기
         ps = conn.prepareStatement("SELECT * FROM Hospital ");
@@ -81,7 +83,6 @@ public class HospitalDao {
     public void select(String id) throws ClassNotFoundException, SQLException {
 
 
-
         ps = conn.prepareStatement("SELECT * FROM Hospital  WHERE id = ?");
         ps.setString(1, id);
         ResultSet resultSet = ps.executeQuery();
@@ -95,6 +96,7 @@ public class HospitalDao {
 
 
     }
+
     public Hospital selectById(String id) throws ClassNotFoundException, SQLException {
 
 
@@ -116,10 +118,11 @@ public class HospitalDao {
         return hospital;
 
     }
+
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
         HospitalDao hospitalDao = new HospitalDao();
-        Hospital hospital = new Hospital("B1121066","서울특별시 영등포구 국회대로 612 코레일유통 사옥 20층 (당산동3가)",
-                "서울특별시 영등포구","C",2,"근로복지공단서울의원","외과 , 소아 , 교정 , 관절 , 봉합 , ");
+        Hospital hospital = new Hospital("B1121066", "서울특별시 영등포구 국회대로 612 코레일유통 사옥 20층 (당산동3가)",
+                "서울특별시 영등포구", "C", 2, "근로복지공단서울의원", "외과 , 소아 , 교정 , 관절 , 봉합 , ");
 
         hospitalDao.add(hospital);
 //        userDao.select();
