@@ -31,7 +31,7 @@ public class UserDao {
 
     }
 
-    public User get(String id) throws SQLException, ClassNotFoundException {
+    public User getById(String id) throws SQLException, ClassNotFoundException {
         Connection c = connectionMaker.makeConnection();
         PreparedStatement ps = c.prepareStatement("SELECT * FROM users where id = ?");
 
@@ -39,10 +39,7 @@ public class UserDao {
         ResultSet rs = ps.executeQuery();
         rs.next();
 
-        User user = new User();
-        user.setId(rs.getString("id"));
-        user.setName(rs.getString("name"));
-        user.setPassword(rs.getString("password"));
+        User user = new User(rs.getString("id"),rs.getString("name"),rs.getString("password"));
         rs.close();
         ps.close();
         c.close();
