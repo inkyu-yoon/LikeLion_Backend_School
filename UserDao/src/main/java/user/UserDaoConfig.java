@@ -1,4 +1,9 @@
-package user.dao;
+package user;
+
+import user.ConnectionMaker.ConnectionMaker;
+import user.ConnectionMaker.DConnectionMaker;
+import user.ConnectionMaker.NConnectionMaker;
+import user.dao.UserDao;
 
 public class UserDaoConfig {
 
