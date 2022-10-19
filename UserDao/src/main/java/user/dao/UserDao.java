@@ -3,17 +3,22 @@ package user.dao;
 import user.ConnectionMaker.ConnectionMaker;
 import user.domain.User;
 
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
 
 
     private ConnectionMaker connectionMaker;
-
+    private DataSource dataSource;
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
+    //매개변수로 입력받아야 추상화할 수 있다. 객체를 생성할때, 직접 넣어주는 방법이 아니면, 구현클래스를 사용할 수 밖에 없게 됨
 
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
     public void add(User user) throws ClassNotFoundException, SQLException {
 
         Connection c = connectionMaker.makeConnection();
@@ -45,5 +50,23 @@ public class UserDao {
         c.close();
 
         return user;
+    }
+
+    public void delete() throws SQLException, ClassNotFoundException {
+        Connection c = connectionMaker.makeConnection();
+        PreparedStatement ps = c.prepareStatement("DELETE FROM USERS");
+        ps.executeUpdate();
+        ps.close();
+        c.close();
+
+    }
+    public void deleteById(String id) throws SQLException, ClassNotFoundException {
+        Connection c = connectionMaker.makeConnection();
+        PreparedStatement ps = c.prepareStatement("DELETE FROM USERS WHERE id = ?");
+        ps.setString(1, id);
+        ps.executeUpdate();
+        ps.close();
+        c.close();
+
     }
 }
