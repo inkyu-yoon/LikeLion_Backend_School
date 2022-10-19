@@ -2,7 +2,7 @@ package stack;
 
 public class StackImpl {
     private int[] stack;
-    private int pointer = 0;
+    private int pointer = -1;
     //size 지정 안할 시 10000으로 잡음
     public StackImpl() {
         this.stack = new int[10000];
@@ -14,7 +14,7 @@ public class StackImpl {
 
     //스택에 값 집어넣기
     public void push(int value) {
-        this.stack[this.pointer++] = value;
+        this.stack[++this.pointer] = value;
     }
 
     //스택 배열 반환하기
@@ -25,5 +25,9 @@ public class StackImpl {
     //특정 인덱스를 지정해서 값 반환하기
     public int getArrById(int index){
         return stack[index];
+    }
+
+    public int pop() {
+        return stack[pointer--];
     }
 }
