@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import user.ConnectionMaker.ConnectionMaker;
@@ -19,19 +20,14 @@ import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class) //autowired 를 사용하기 위해 추가해주는 에너테이션 + 한번 더 자세하게 찾아보기
-@ContextConfiguration(classes = UserDaoConfig.class) //context에 config 파일을 넣어주는 역할? + 한번 더 자세하게 찾아보기
 class UserDaoTest {
 
-    @Autowired
-    ApplicationContext ac;
+    ApplicationContext ac = new AnnotationConfigApplicationContext(UserDaoConfig.class);
+    UserDao userDao=ac.getBean("userDao", UserDao.class);
 
-    UserDao userDao;
     @BeforeEach
-    void setUPandDelete() throws SQLException, ClassNotFoundException {
-        this.userDao = ac.getBean("userDao", UserDao.class);
+    void RunBeforeDelete() throws SQLException, ClassNotFoundException {
         userDao.deleteAll();
-
     }
 
     @Test
