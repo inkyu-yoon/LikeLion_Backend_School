@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.*;
 class UserDaoTest {
 
     ApplicationContext ac = new AnnotationConfigApplicationContext(UserDaoConfig.class);
-    UserDao userDao=ac.getBean("userDao", UserDao.class);
+    UserDao userDao = ac.getBean("userDao", UserDao.class);
 
     @BeforeEach
     void RunBeforeDelete() throws SQLException, ClassNotFoundException {
