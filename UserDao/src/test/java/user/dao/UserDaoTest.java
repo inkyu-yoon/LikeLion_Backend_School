@@ -1,6 +1,7 @@
 package user.dao;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,17 +26,27 @@ class UserDaoTest {
     @Autowired
     ApplicationContext ac;
 
+    @BeforeEach
+    void beforeEach() throws SQLException, ClassNotFoundException {
+        UserDao userDao = ac.getBean("userDao", UserDao.class);
+        userDao.deleteAll();
+
+    }
+
     @Test
     @DisplayName("insert 랑 select 테스트")
     void addAndSelect() throws SQLException, ClassNotFoundException {
+
         UserDao userDao = ac.getBean("userDao", UserDao.class);
-        String id = "23322";
+        String id = "23323";
         userDao.add(new User(id, "inkyu", "12341234"));
 
         User user = userDao.getById(id);
         assertThat("inkyu").isEqualTo(user.getName());
 
         userDao.deleteAll();
+
+        Assertions.assertThrows(NullPointerException.class,()->userDao.getById(id));
 
         User user1=new User("1111", "inkyu", "12341234");
         User user2=new User("2222", "inkyu", "12341234");
@@ -98,7 +109,7 @@ class UserDaoTest {
         System.out.println();
         userDao.deleteById(id);
 
-        Assertions.assertThrows(SQLException.class, () -> userDao.getById(id));
+        Assertions.assertThrows(NullPointerException.class, () -> userDao.getById(id));
     }
 
     @Test
@@ -112,6 +123,6 @@ class UserDaoTest {
         //assertj 를 쓰는 것이 메서드가 분리되어있어 가독성도 좋고 코드 작성도 편함.
 
         userDao.deleteAll();
-        Assertions.assertThrows(SQLException.class, () -> userDao.getById("Id"));
+        Assertions.assertThrows(NullPointerException.class, () -> userDao.getById("Id"));
     }
 }

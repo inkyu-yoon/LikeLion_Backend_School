@@ -40,15 +40,21 @@ public class UserDao {
         Connection c = connectionMaker.makeConnection();
         PreparedStatement ps = c.prepareStatement("SELECT * FROM userdao.users where id = ?");
         ps.setString(1, id);
-
-
         ResultSet rs = ps.executeQuery();
-        rs.next();
 
-        User user = new User(rs.getString("id"),rs.getString("name"),rs.getString("password"));
+        User user = null;
+        if(rs.next()) {
+            user = new User();
+            user.setId(rs.getString("id"));
+            user.setName(rs.getString("name"));
+            user.setPassword(rs.getString("password"));
+        }
+
         rs.close();
         ps.close();
         c.close();
+
+        if (user == null) throw new NullPointerException();
 
         return user;
     }
