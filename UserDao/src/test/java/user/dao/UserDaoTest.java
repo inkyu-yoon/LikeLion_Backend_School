@@ -26,9 +26,10 @@ class UserDaoTest {
     @Autowired
     ApplicationContext ac;
 
+    UserDao userDao;
     @BeforeEach
-    void beforeEach() throws SQLException, ClassNotFoundException {
-        UserDao userDao = ac.getBean("userDao", UserDao.class);
+    void setUPandDelete() throws SQLException, ClassNotFoundException {
+        this.userDao = ac.getBean("userDao", UserDao.class);
         userDao.deleteAll();
 
     }
@@ -37,7 +38,7 @@ class UserDaoTest {
     @DisplayName("insert 랑 select 테스트")
     void addAndSelect() throws SQLException, ClassNotFoundException {
 
-        UserDao userDao = ac.getBean("userDao", UserDao.class);
+
         String id = "23323";
         userDao.add(new User(id, "inkyu", "12341234"));
 
@@ -101,7 +102,7 @@ class UserDaoTest {
     @Test
     @DisplayName("삭제 메서드 테스트")
     void 삭제() throws SQLException, ClassNotFoundException {
-        UserDao userDao = ac.getBean("userDao", UserDao.class);
+
         String id = "AddForTest";
         userDao.add(new User(id, "inkyu", "12341234"));
         System.out.println();
@@ -115,7 +116,7 @@ class UserDaoTest {
     @Test
     @DisplayName("deleteAll & getCount 테스트")
     void 삭제랑카운트() throws SQLException, ClassNotFoundException {
-        UserDao userDao = ac.getBean("userDao", UserDao.class);
+
         userDao.add(new User("Id", "inkyu", "12341234"));
         assertThat(userDao.getCount()).isEqualTo(1);
         // 카운트메서드 테스트
