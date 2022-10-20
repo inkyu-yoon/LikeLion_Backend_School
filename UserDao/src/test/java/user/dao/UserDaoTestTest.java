@@ -41,22 +41,6 @@ class UserDaoTestTest {
     }
 
     @Test
-    @DisplayName("삭제 메서드 테스트")
-    void 삭제() throws SQLException, ClassNotFoundException {
-        UserDao userDao = ac.getBean("userDao", UserDao.class);
-        String id = "AddForTest";
-        userDao.add(new User(id, "inkyu", "12341234"));
-        System.out.println();
-        System.out.println(userDao.getById(id).getName() + "의 id를 생성했습니다!!");
-        System.out.println();
-        userDao.deleteById(id);
-
-        Assertions.assertThrows(SQLException.class, () -> userDao.getById(id));
-
-
-    }
-
-    @Test
     @DisplayName("커넥션 테스트")
     void 커낵션() throws SQLException, ClassNotFoundException {
         ConnectionMaker cm = ac.getBean("connectionMaker", ConnectionMaker.class);
@@ -88,5 +72,31 @@ class UserDaoTestTest {
         System.out.println();
         System.out.println(cm.getCounter());
         System.out.println();
+    }
+
+    @Test
+    @DisplayName("삭제 메서드 테스트")
+    void 삭제() throws SQLException, ClassNotFoundException {
+        UserDao userDao = ac.getBean("userDao", UserDao.class);
+        String id = "AddForTest";
+        userDao.add(new User(id, "inkyu", "12341234"));
+        System.out.println();
+        System.out.println(userDao.getById(id).getName() + "의 id를 생성했습니다!!");
+        System.out.println();
+        userDao.deleteById(id);
+
+        Assertions.assertThrows(SQLException.class, () -> userDao.getById(id));
+    }
+
+    @Test
+    @DisplayName("deleteAll & getCount 테스트")
+    void 삭제랑카운트() throws SQLException, ClassNotFoundException {
+        UserDao userDao = ac.getBean("userDao", UserDao.class);
+        userDao.add(new User("Id", "inkyu", "12341234"));
+        assertThat(userDao.getCount()).isEqualTo(1);
+        // 카운트메서드 테스트
+
+        userDao.deleteAll();
+        Assertions.assertThrows(SQLException.class, () -> userDao.getById("Id"));
     }
 }
