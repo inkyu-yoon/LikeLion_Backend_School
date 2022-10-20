@@ -33,14 +33,16 @@ public class StackImpl {
         return stack;
     }
 
-    public int pop() {
-        return stack[pointer--];
+    public Integer pop() {
+        if(!isEmpty()) {
+            return stack[pointer--];
+        }
+        return null;
     }
     public boolean isEmpty(){
         if (pointer == -1) {
             return true;
         }
-
         return false;
     }
 }

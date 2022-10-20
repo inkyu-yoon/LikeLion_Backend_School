@@ -11,11 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class StackImplTest {
 
     @BeforeEach
-    void setup(){
+    void setup() {
         System.out.println("before each 실행");
         //각 테스트 하기전에 실행되는 구현부는 @BeforeEach에 넣기
     }
-
 
 
     @Test
@@ -41,7 +40,13 @@ class StackImplTest {
 
         assertThat(secondInput).isEqualTo(stack.pop());
         assertThat(firstInput).isEqualTo(stack.pop());
-
         //스택은 마지막에 입력된게 먼저 나온다.
+    }
+
+    @Test
+    @DisplayName("isEmpty 테스트 추가")
+    void 이즈엠티기능확인(){
+        StackImpl stack = new StackImpl();
+        assertThat(stack.pop()).isEqualTo(null);
     }
 }
