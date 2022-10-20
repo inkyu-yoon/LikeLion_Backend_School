@@ -35,7 +35,21 @@ class UserDaoTest {
         User user = userDao.getById(id);
         assertThat("inkyu").isEqualTo(user.getName());
 
-        userDao.deleteById(id);
+        userDao.deleteAll();
+
+        User user1=new User("1111", "inkyu", "12341234");
+        User user2=new User("2222", "inkyu", "12341234");
+
+        userDao.add(user1);
+        User user1Get = userDao.getById("1111");
+        assertThat(user1Get.getName()).isEqualTo(user1.getName());
+        assertThat(user1Get.getPassword()).isEqualTo(user1.getPassword());
+
+        userDao.add(user2);
+        User user2Get = userDao.getById("2222");
+        assertThat(user2Get.getName()).isEqualTo(user2.getName());
+        assertThat(user2Get.getPassword()).isEqualTo(user2.getPassword());
+
 
     }
 
@@ -94,6 +108,8 @@ class UserDaoTest {
         userDao.add(new User("Id", "inkyu", "12341234"));
         assertThat(userDao.getCount()).isEqualTo(1);
         // 카운트메서드 테스트
+
+        //assertj 를 쓰는 것이 메서드가 분리되어있어 가독성도 좋고 코드 작성도 편함.
 
         userDao.deleteAll();
         Assertions.assertThrows(SQLException.class, () -> userDao.getById("Id"));
