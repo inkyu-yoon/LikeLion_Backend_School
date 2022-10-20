@@ -9,6 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StackImplTest {
+    StackImpl stack = new StackImpl();
 
     @BeforeEach
     void setup() {
@@ -20,7 +21,7 @@ class StackImplTest {
     @Test
     @DisplayName("push 테스트")
     void 푸쉬테스트() {
-        StackImpl stack = new StackImpl();
+
         stack.push(100);
         stack.push(200);
 
@@ -32,7 +33,6 @@ class StackImplTest {
     @Test
     @DisplayName("pop 테스트")
     void 팝테스트() {
-        StackImpl stack = new StackImpl();
         int firstInput = 100;
         int secondInput = 200;
         stack.push(firstInput);
@@ -45,8 +45,16 @@ class StackImplTest {
 
     @Test
     @DisplayName("isEmpty 테스트 추가")
-    void 이즈엠티기능확인(){
-        StackImpl stack = new StackImpl();
+    void 이즈엠티기능확인() {
+
         assertThat(stack.pop()).isEqualTo(null);
+    }
+
+    @Test
+    @DisplayName("peek 테스트")
+    void 픽테스트() {
+        int input = 100;
+        stack.push(input);
+        assertThat(input).isEqualTo(stack.peek());
     }
 }

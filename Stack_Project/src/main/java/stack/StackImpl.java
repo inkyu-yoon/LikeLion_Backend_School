@@ -45,4 +45,8 @@ public class StackImpl {
         }
         return false;
     }
+
+    public int peek(){
+        return stack[pointer];
+    }
 }
