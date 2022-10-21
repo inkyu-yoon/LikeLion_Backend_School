@@ -12,6 +12,7 @@ import javax.sql.rowset.CachedRowSet;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class UserDao {
 
@@ -52,21 +53,23 @@ public class UserDao {
 
     }
 
-    public ArrayList<HashMap<String,Integer>> jdbcContextWithStatementStrategyForExecute(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
+    public ArrayList<HashMap<String,Object>> jdbcContextWithStatementStrategyForExecute(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
 
         Connection c = null;
         PreparedStatement ps = null;
-        ArrayList<HashMap<String, Integer>> list = new ArrayList<HashMap<String, Integer>>();
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
         try {
             c = connectionMaker.makeConnection();
             ps = stmt.makePreparedStatement(c);
             rs = ps.executeQuery();
             ResultSetMetaData md = rs.getMetaData();
+            System.out.println("md = " + md);
             int columns = md.getColumnCount();
+            System.out.println("columns = " + columns);
             while(rs.next()){
-                HashMap<String, Integer> row = new HashMap<String,Integer>(columns);
-                for (int i = 1; i <= columns; ++i) {
-                    row.put(md.getColumnName(i), rs.getInt(i));
+                HashMap<String, Object> row = new HashMap<>(columns);
+                for (int i = 1; i <= columns; i++) {
+                    row.put(md.getColumnName(i), rs.getObject(i));
                 }
                 list.add(row);
             }
@@ -98,9 +101,9 @@ public class UserDao {
 
     public int getCount() throws SQLException, ClassNotFoundException {
         StatementStrategy st = new CountStatement();
-        ArrayList<HashMap<String,Integer>> list = jdbcContextWithStatementStrategyForExecute(st);
+        ArrayList<HashMap<String, Object>> list = jdbcContextWithStatementStrategyForExecute(st);
         System.out.println(list);
-        return list.get(0).get("count");
+        return Integer.valueOf(String.valueOf(list.get(0).get("count")));
 
     }
 
