@@ -1,6 +1,7 @@
 package user.dao;
 
 import user.ConnectionMaker.ConnectionMaker;
+import user.StatementStrategy.AddStatement;
 import user.StatementStrategy.DeleteAllStatement;
 import user.StatementStrategy.StatementStrategy;
 import user.domain.User;
@@ -27,11 +28,8 @@ public class UserDao {
 
         Connection c = connectionMaker.makeConnection();
         //mysql이랑 연결
-
-        PreparedStatement ps = c.prepareStatement("INSERT INTO users(id,name,password) values(?,?,?)");
-        ps.setString(1, user.getId());
-        ps.setString(2, user.getName());
-        ps.setString(3, user.getPassword());
+        StatementStrategy statementStrategy = new AddStatement(user);
+        PreparedStatement ps = statementStrategy.makePreparedStatement(c);
 
         ps.executeUpdate();
         //insert 문에서 사용
