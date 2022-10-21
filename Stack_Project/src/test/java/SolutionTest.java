@@ -25,7 +25,8 @@ class SolutionTest {
     @Test
     @DisplayName("스택으로")
     void solution3() {
-        Assertions.assertFalse(solution.solution3("{}()[](({))"));
+        Assertions.assertFalse(solution.solution3("{}()[](({{))"));
         Assertions.assertTrue(solution.solution3("{}()[](({}))"));
+        Assertions.assertFalse(solution.solution3("{]"));
     }
 }
