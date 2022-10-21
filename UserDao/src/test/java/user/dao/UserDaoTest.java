@@ -42,7 +42,6 @@ class UserDaoTest {
         assertThat("inkyu").isEqualTo(user.getName());
 
         userDao.deleteAll();
-
         Assertions.assertThrows(NullPointerException.class,()->userDao.getById(id));
 
         User user1=new User("1111", "inkyu", "12341234");
@@ -59,6 +58,12 @@ class UserDaoTest {
         assertThat(user2Get.getPassword()).isEqualTo(user2.getPassword());
 
 
+    }
+
+    @Test
+    void 리팩토링후add테스트(){
+        User user = null;
+        Assertions.assertThrows(NullPointerException.class,()->userDao.add(user));
     }
 
     @Test
@@ -104,7 +109,7 @@ class UserDaoTest {
         System.out.println();
         System.out.println(userDao.getById(id).getName() + "의 id를 생성했습니다!!");
         System.out.println();
-        userDao.deleteById(id);
+        userDao.deleteAll();
 
         Assertions.assertThrows(NullPointerException.class, () -> userDao.getById(id));
     }
@@ -113,13 +118,14 @@ class UserDaoTest {
     @DisplayName("deleteAll & getCount 테스트")
     void 삭제랑카운트() throws SQLException, ClassNotFoundException {
 
-        userDao.add(new User("Id", "inkyu", "12341234"));
-        assertThat(userDao.getCount()).isEqualTo(1);
+        userDao.add(new User("Id1", "inkyu", "12341234"));
+        userDao.add(new User("Id2", "inkyu", "12341234"));
+        assertThat(userDao.getCount()).isEqualTo(2);
         // 카운트메서드 테스트
 
         //assertj 를 쓰는 것이 메서드가 분리되어있어 가독성도 좋고 코드 작성도 편함.
 
         userDao.deleteAll();
-        Assertions.assertThrows(NullPointerException.class, () -> userDao.getById("Id"));
+        assertThat(userDao.getCount()).isEqualTo(0);
     }
 }

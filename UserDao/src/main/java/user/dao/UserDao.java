@@ -1,6 +1,8 @@
 package user.dao;
 
 import user.ConnectionMaker.ConnectionMaker;
+import user.StatementStrategy.DeleteAllStatement;
+import user.StatementStrategy.StatementStrategy;
 import user.domain.User;
 
 import javax.sql.DataSource;
@@ -26,7 +28,7 @@ public class UserDao {
         Connection c = connectionMaker.makeConnection();
         //mysql이랑 연결
 
-        PreparedStatement ps = c.prepareStatement("INSERT INTO userdao.users(id,name,password) values(?,?,?)");
+        PreparedStatement ps = c.prepareStatement("INSERT INTO users(id,name,password) values(?,?,?)");
         ps.setString(1, user.getId());
         ps.setString(2, user.getName());
         ps.setString(3, user.getPassword());
@@ -40,7 +42,7 @@ public class UserDao {
 
     public User getById(String id) throws SQLException, ClassNotFoundException {
         Connection c = connectionMaker.makeConnection();
-        PreparedStatement ps = c.prepareStatement("SELECT * FROM userdao.users where id = ?");
+        PreparedStatement ps = c.prepareStatement("SELECT * FROM users where id = ?");
         ps.setString(1, id);
         ResultSet rs = ps.executeQuery();
 
@@ -65,8 +67,9 @@ public class UserDao {
         Connection c = null;
         PreparedStatement ps = null;
         try {
+            StatementStrategy statementStrategy = new DeleteAllStatement();
             c = connectionMaker.makeConnection();
-            ps = c.prepareStatement("DELETE FROM userdao.users");
+            ps = statementStrategy.makePreparedStatement(c);
             ps.executeUpdate();
         } catch (SQLException e) {
             throw e;
@@ -89,15 +92,6 @@ public class UserDao {
 
     }
 
-    public void deleteById(String id) throws SQLException, ClassNotFoundException {
-        Connection c = connectionMaker.makeConnection();
-        PreparedStatement ps = c.prepareStatement("DELETE FROM userdao.users WHERE id = ?");
-        ps.setString(1, id);
-        ps.executeUpdate();
-        ps.close();
-        c.close();
-
-    }
 
     public int getCount() throws SQLException, ClassNotFoundException {
         Connection c = null;
@@ -105,7 +99,7 @@ public class UserDao {
         ResultSet rs = null;
         try {
             c= connectionMaker.makeConnection();
-            ps = c.prepareStatement("SELECT COUNT(*) as count FROM userdao.users");
+            ps = c.prepareStatement("SELECT COUNT(*) as count FROM users");
             rs = ps.executeQuery();
             rs.next();
             return rs.getInt("count");
