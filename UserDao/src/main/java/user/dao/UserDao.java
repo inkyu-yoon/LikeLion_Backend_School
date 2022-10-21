@@ -10,6 +10,8 @@ import user.domain.User;
 import javax.sql.DataSource;
 import javax.sql.rowset.CachedRowSet;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserDao {
 
@@ -50,19 +52,35 @@ public class UserDao {
 
     }
 
-    public int jdbcContextWithStatementStrategyForExecute(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
+    public ArrayList<HashMap<String,Integer>> jdbcContextWithStatementStrategyForExecute(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
+
         Connection c = null;
         PreparedStatement ps = null;
+        ArrayList<HashMap<String, Integer>> list = new ArrayList<HashMap<String, Integer>>();
         try {
             c = connectionMaker.makeConnection();
             ps = stmt.makePreparedStatement(c);
             rs = ps.executeQuery();
-            rs.next();
-            count = rs.getInt("count");
-            return count;
+            ResultSetMetaData md = rs.getMetaData();
+            int columns = md.getColumnCount();
+            while(rs.next()){
+                HashMap<String, Integer> row = new HashMap<String,Integer>(columns);
+                for (int i = 1; i <= columns; ++i) {
+                    row.put(md.getColumnName(i), rs.getInt(i));
+                }
+                list.add(row);
+            }
+
+            return list;
         } catch (SQLException e) {
             throw e;
         } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                }
+            }
             if (ps != null) {
                 try {
                     ps.close();
@@ -80,7 +98,10 @@ public class UserDao {
 
     public int getCount() throws SQLException, ClassNotFoundException {
         StatementStrategy st = new CountStatement();
-        return jdbcContextWithStatementStrategyForExecute(st);
+        ArrayList<HashMap<String,Integer>> list = jdbcContextWithStatementStrategyForExecute(st);
+        System.out.println(list);
+        return list.get(0).get("count");
+
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
