@@ -1,14 +1,18 @@
 package stack;
 
-public class StackImpl {
+import java.util.EmptyStackException;
+
+public class MakeStack {
     private int[] stack;
     private int pointer = -1;
+
     //size 지정 안할 시 10000으로 잡음
-    public StackImpl() {
+    public MakeStack() {
         this.stack = new int[10000];
     }
+
     //스택 사이즈 직접 지정
-    public StackImpl(int size) {
+    public MakeStack(int size) {
 
         this.stack = new int[size];
     }
@@ -20,33 +24,41 @@ public class StackImpl {
     }
 
     //스택 배열 반환하기
-    public int[] getStack() {
+    public int[] getArr() {
 
-        return stack;
+        return this.stack;
     }
 
     //특정 인덱스를 지정해서 값 반환하기
-    public int getArrById(int index){
+    public int getArrById(int index) {
         return stack[index];
     }
-    public int[] getArr(int index){
+
+    public int[] getArr(int index) {
         return stack;
     }
 
-    public Integer pop() {
-        if(!isEmpty()) {
-            return stack[pointer--];
+    public int pop() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
         }
-        return null;
+        return stack[pointer--];
     }
-    public boolean isEmpty(){
+
+    public boolean isEmpty() {
         if (pointer == -1) {
             return true;
         }
         return false;
     }
 
-    public int peek(){
+    public int peek() {
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
         return stack[pointer];
+    }
+    public int 안녕(){
+        return 1;
     }
 }
