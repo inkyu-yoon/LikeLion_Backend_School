@@ -11,18 +11,12 @@ import java.sql.*;
 
 public class UserDao {
 
-
     private ConnectionMaker connectionMaker;
-    private DataSource dataSource;
 
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
     //매개변수로 입력받아야 추상화할 수 있다. 객체를 생성할때, 직접 넣어주는 방법이 아니면, 구현클래스를 사용할 수 밖에 없게 됨
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
 
     public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
         Connection c = null;
@@ -33,7 +27,7 @@ public class UserDao {
             ps.executeUpdate();
         } catch (SQLException e) {
             throw e;
-        } finally{
+        } finally {
             if (ps != null) {
                 try {
                     ps.close();
@@ -51,11 +45,15 @@ public class UserDao {
         }
 
     }
-    public void add(User user) throws ClassNotFoundException, SQLException {
 
+    public void add(User user) throws ClassNotFoundException, SQLException {
         StatementStrategy st = new AddStatement(user);
         jdbcContextWithStatementStrategy(st);
+    }
 
+    public void deleteAll() throws SQLException, ClassNotFoundException {
+        StatementStrategy st = new DeleteAllStatement();
+        jdbcContextWithStatementStrategy(st);
     }
 
     public User getById(String id) throws SQLException, ClassNotFoundException {
@@ -81,19 +79,13 @@ public class UserDao {
         return user;
     }
 
-    public void deleteAll() throws SQLException, ClassNotFoundException {
-        StatementStrategy st = new DeleteAllStatement();
-        jdbcContextWithStatementStrategy(st);
-
-    }
-
 
     public int getCount() throws SQLException, ClassNotFoundException {
         Connection c = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            c= connectionMaker.makeConnection();
+            c = connectionMaker.makeConnection();
             ps = c.prepareStatement("SELECT COUNT(*) as count FROM users");
             rs = ps.executeQuery();
             rs.next();
@@ -122,7 +114,5 @@ public class UserDao {
                 }
             }
         }
-
-
     }
 }
