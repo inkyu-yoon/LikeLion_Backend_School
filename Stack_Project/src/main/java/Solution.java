@@ -5,7 +5,7 @@ class Solution {
         boolean answer = true;
         int a = 0;
         for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') {
+            if (s.charAt(i) == '(' ||s.charAt(i) == '['||s.charAt(i) == '{') {
                 a += 1;
             } else {
                 a -= 1;
@@ -22,8 +22,8 @@ class Solution {
     }
 
     boolean solution2(String s) {
-        while (s.indexOf("()") >= 0) {
-            s = s.replace("()", "");
+        while (s.indexOf("()") >= 0 ||s.indexOf("[]") >= 0||s.indexOf("{}") >= 0) {
+            s = s.replace("()", "").replace("[]", "").replace("{}", "");
         }
         return s.length() == 0;
     }
@@ -32,9 +32,9 @@ class Solution {
         Stack<Character> stack = new Stack<>();
         try {
             for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) == '(') {
-                    stack.push('(');
-                } else if (s.charAt(i) == ')') {
+                if (s.charAt(i) == '(' ||s.charAt(i) == '['||s.charAt(i) == '{') {
+                    stack.push('o');
+                } else if (s.charAt(i) == ')'||s.charAt(i) == ']'||s.charAt(i) == '}') {
                     stack.pop();
                 }
             }
