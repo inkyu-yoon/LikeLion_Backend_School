@@ -2,16 +2,20 @@ package user.dao;
 
 import user.ConnectionMaker.ConnectionMaker;
 import user.StatementStrategy.AddStatement;
+import user.StatementStrategy.CountStatement;
 import user.StatementStrategy.DeleteAllStatement;
 import user.StatementStrategy.StatementStrategy;
 import user.domain.User;
 
 import javax.sql.DataSource;
+import javax.sql.rowset.CachedRowSet;
 import java.sql.*;
 
 public class UserDao {
 
     private ConnectionMaker connectionMaker;
+    private ResultSet rs = null;
+    int count;
 
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
@@ -44,6 +48,39 @@ public class UserDao {
             }
         }
 
+    }
+
+    public int jdbcContextWithStatementStrategyForExecute(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try {
+            c = connectionMaker.makeConnection();
+            ps = stmt.makePreparedStatement(c);
+            rs = ps.executeQuery();
+            rs.next();
+            count = rs.getInt("count");
+            return count;
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (c != null) {
+                try {
+                    c.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public int getCount() throws SQLException, ClassNotFoundException {
+        StatementStrategy st = new CountStatement();
+        return jdbcContextWithStatementStrategyForExecute(st);
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
@@ -80,39 +117,4 @@ public class UserDao {
     }
 
 
-    public int getCount() throws SQLException, ClassNotFoundException {
-        Connection c = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            c = connectionMaker.makeConnection();
-            ps = c.prepareStatement("SELECT COUNT(*) as count FROM users");
-            rs = ps.executeQuery();
-            rs.next();
-            return rs.getInt("count");
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if (c != null) {
-                try {
-                    c.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
-    }
 }
