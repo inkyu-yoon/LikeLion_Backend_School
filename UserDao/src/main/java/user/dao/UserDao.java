@@ -24,17 +24,37 @@ public class UserDao {
         this.dataSource = dataSource;
     }
 
+    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
+        Connection c = null;
+        PreparedStatement ps = null;
+        try {
+            c = connectionMaker.makeConnection();
+            ps = stmt.makePreparedStatement(c);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally{
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+
+                }
+            }
+        }
+        if (c != null) {
+            try {
+                c.close();
+            } catch (SQLException e) {
+
+            }
+        }
+
+    }
     public void add(User user) throws ClassNotFoundException, SQLException {
 
-        Connection c = connectionMaker.makeConnection();
-        //mysql이랑 연결
-        StatementStrategy statementStrategy = new AddStatement(user);
-        PreparedStatement ps = statementStrategy.makePreparedStatement(c);
-
-        ps.executeUpdate();
-        //insert 문에서 사용
-        ps.close();
-        c.close();
+        StatementStrategy st = new AddStatement(user);
+        jdbcContextWithStatementStrategy(st);
 
     }
 
@@ -62,31 +82,8 @@ public class UserDao {
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try {
-            StatementStrategy statementStrategy = new DeleteAllStatement();
-            c = connectionMaker.makeConnection();
-            ps = statementStrategy.makePreparedStatement(c);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-
-                }
-            }
-            if (c != null) {
-                try {
-                    c.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
+        StatementStrategy st = new DeleteAllStatement();
+        jdbcContextWithStatementStrategy(st);
 
     }
 
