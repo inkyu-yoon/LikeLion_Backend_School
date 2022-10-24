@@ -15,16 +15,10 @@ import java.util.HashMap;
 
 public class UserDao {
 
-    private final DataSource dataSource;
-    private final JdbcContext jdbcContext;
     private final JdbcTemplate jdbcTemplate;
-
 
     public UserDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.dataSource = dataSource;
-        this.jdbcContext = new JdbcContext(dataSource);
-
     }
 
     public void add(final User user) throws ClassNotFoundException, SQLException {
@@ -42,7 +36,6 @@ public class UserDao {
         String sql = "SELECT COUNT(*) AS COUNT FROM USERS";
         return this.jdbcTemplate.queryForObject(sql, Integer.class);
     }
-
 
     public User getById(String id) throws SQLException, ClassNotFoundException {
         String sql = "SELECT * FROM USERS WHERE ID = ?";
