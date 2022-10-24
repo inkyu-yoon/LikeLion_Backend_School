@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import user.ConnectionMaker.ConnectionMaker;
@@ -43,7 +44,7 @@ class UserDaoTest {
         assertThat("inkyu").isEqualTo(user.getName());
 
         userDao.deleteAll();
-        Assertions.assertThrows(NullPointerException.class,()->userDao.getById(id));
+        Assertions.assertThrows(EmptyResultDataAccessException.class,()->userDao.getById(id));
 
         User user1=new User("1111", "inkyu", "12341234");
         User user2=new User("2222", "inkyu", "12341234");
@@ -102,7 +103,7 @@ class UserDaoTest {
         System.out.println();
         userDao.deleteAll();
 
-        Assertions.assertThrows(NullPointerException.class, () -> userDao.getById(id));
+        Assertions.assertThrows(EmptyResultDataAccessException.class, () -> userDao.getById(id));
     }
 
     @Test
