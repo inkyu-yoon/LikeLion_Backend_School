@@ -4,16 +4,18 @@ import user.ConnectionMaker.ConnectionMaker;
 import user.StatementStrategy.*;
 import user.domain.User;
 
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserDao {
 
-    private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
 
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public UserDao(DataSource dataSource) {
+        this.dataSource = dataSource;
 
     }
 
@@ -69,7 +71,7 @@ public class UserDao {
         Connection c = null;
         PreparedStatement ps = null;
         try {
-            c = connectionMaker.makeConnection();
+            c = dataSource.getConnection();
             ps = stmt.makePreparedStatement(c);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -99,7 +101,7 @@ public class UserDao {
         PreparedStatement ps = null;
         ArrayList<HashMap<String, Object>> list = new ArrayList<>();
         try {
-            c = connectionMaker.makeConnection();
+            c = dataSource.getConnection();
             ps = stmt.makePreparedStatement(c);
             rs = ps.executeQuery();
             ResultSetMetaData md = rs.getMetaData();

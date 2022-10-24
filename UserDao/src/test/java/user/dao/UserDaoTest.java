@@ -15,6 +15,7 @@ import user.ConnectionMaker.CountingConnectionMaker;
 import user.UserDaoConfig;
 import user.domain.User;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -69,8 +70,8 @@ class UserDaoTest {
     @Test
     @DisplayName("커넥션 테스트")
     void 커낵션() throws SQLException, ClassNotFoundException {
-        ConnectionMaker cm = ac.getBean("connectionMaker", ConnectionMaker.class);
-        Connection c = cm.makeConnection();
+        DataSource cm = ac.getBean("dataSource", DataSource.class);
+        Connection c = cm.getConnection();
     }
 
 
@@ -88,16 +89,6 @@ class UserDaoTest {
         assertThat(userDao3).isNotSameAs(userDao4);
         //Configuration 에서 직접 가져온 객체는 다른 주소값, 즉 다른 객체를 반환한다.
 
-    }
-
-    @Test
-    @DisplayName("카운팅 테스트")
-    void 카운팅() throws SQLException, ClassNotFoundException {
-        CountingConnectionMaker cm = ac.getBean("connectionMaker", CountingConnectionMaker.class);
-        cm.makeConnection();
-        System.out.println();
-        System.out.println(cm.getCounter());
-        System.out.println();
     }
 
     @Test
