@@ -14,6 +14,17 @@ public class JdbcContext {
         this.dataSource = dataSource;
     }
 
+    public void executeSql(final String query) throws SQLException, ClassNotFoundException {
+        StatementStrategyForUpdate(
+                new StatementStrategy() {
+                    public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+                        PreparedStatement ps = c.prepareStatement(query);
+                        return ps;
+                    }
+                }
+        );
+    }
+
     public void StatementStrategyForUpdate(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
         Connection c = null;
         PreparedStatement ps = null;
