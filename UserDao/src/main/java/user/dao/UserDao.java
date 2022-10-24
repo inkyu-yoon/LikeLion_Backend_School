@@ -13,15 +13,17 @@ import java.util.HashMap;
 
 public class UserDao {
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
+    private final JdbcContext jdbcContext;
+
 
     public UserDao(DataSource dataSource) {
         this.dataSource = dataSource;
+        this.jdbcContext = new JdbcContext(dataSource);
 
     }
 
     public void add(final User user) throws ClassNotFoundException, SQLException {
-        JdbcContext jdbcContext = new JdbcContext(dataSource);
 
         jdbcContext.StatementStrategyForUpdate(new StatementStrategy() {
             public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
@@ -38,7 +40,6 @@ public class UserDao {
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
-        JdbcContext jdbcContext = new JdbcContext(dataSource);
 
         jdbcContext.StatementStrategyForUpdate(new StatementStrategy() {
             public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
@@ -50,7 +51,6 @@ public class UserDao {
 
 
     public int getCount() throws SQLException, ClassNotFoundException {
-        JdbcContext jdbcContext = new JdbcContext(dataSource);
         StatementStrategy st = new CountStatement();
         ArrayList<HashMap<String, Object>> list = jdbcContext.StatementStrategyForExecute(st);
         System.out.println(list);
@@ -59,7 +59,6 @@ public class UserDao {
 
 
     public User getById(String id) throws SQLException, ClassNotFoundException {
-        JdbcContext jdbcContext = new JdbcContext(dataSource);
         StatementStrategy st = new SelectStatement(id);
         ArrayList<HashMap<String, Object>> list = jdbcContext.StatementStrategyForExecute(st);
         User user = null;
