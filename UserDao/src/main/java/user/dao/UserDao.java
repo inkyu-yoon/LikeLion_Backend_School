@@ -25,14 +25,27 @@ public class UserDao {
     }
 
 
-    public void add(User user) throws ClassNotFoundException, SQLException {
-        StatementStrategy st = new AddStatement(user);
-        StatementStrategyForUpdate(st);
+    public void add(final User user) throws ClassNotFoundException, SQLException {
+
+        StatementStrategyForUpdate(new StatementStrategy(){
+            public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+                PreparedStatement ps = c.prepareStatement("INSERT INTO users(id,name,password) values(?,?,?)");
+                ps.setString(1, user.getId());
+                ps.setString(2, user.getName());
+                ps.setString(3, user.getPassword());
+                //내부 클래스라서 User를 생성자로 입력 안받아도 바로 사용할 수 있다는 장점이 있다.
+                return ps;
+            }
+        });
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
-        StatementStrategy st = new DeleteAllStatement();
-        StatementStrategyForUpdate(st);
+        StatementStrategyForUpdate(new StatementStrategy() {
+            public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+                PreparedStatement ps = c.prepareStatement("delete from users");
+                return ps;
+            }
+        });
     }
 
     public User getById(String id) throws SQLException, ClassNotFoundException {
