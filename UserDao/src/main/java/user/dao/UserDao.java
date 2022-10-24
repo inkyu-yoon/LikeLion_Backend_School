@@ -31,6 +31,8 @@ public class UserDao {
                 return ps;
             }
         });
+
+        //메서드(new 인터페이스() {구현부} ) 익명 클래스로 사용, 생성자로 입력받지 않아도, 여러 변수들을 공유할 수 있는 장점이 있다.
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
