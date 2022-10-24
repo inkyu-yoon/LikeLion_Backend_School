@@ -1,6 +1,7 @@
 package user.dao;
 
 import user.ConnectionMaker.ConnectionMaker;
+import user.Jdbc.JdbcContext;
 import user.StatementStrategy.*;
 import user.domain.User;
 
@@ -20,8 +21,9 @@ public class UserDao {
     }
 
     public void add(final User user) throws ClassNotFoundException, SQLException {
+        JdbcContext jdbcContext = new JdbcContext(dataSource);
 
-        StatementStrategyForUpdate(new StatementStrategy() {
+        jdbcContext.StatementStrategyForUpdate(new StatementStrategy() {
             public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
                 PreparedStatement ps = c.prepareStatement("INSERT INTO users(id,name,password) values(?,?,?)");
                 ps.setString(1, user.getId());
@@ -36,7 +38,9 @@ public class UserDao {
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
-        StatementStrategyForUpdate(new StatementStrategy() {
+        JdbcContext jdbcContext = new JdbcContext(dataSource);
+
+        jdbcContext.StatementStrategyForUpdate(new StatementStrategy() {
             public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
                 PreparedStatement ps = c.prepareStatement("delete from users");
                 return ps;
@@ -46,16 +50,18 @@ public class UserDao {
 
 
     public int getCount() throws SQLException, ClassNotFoundException {
+        JdbcContext jdbcContext = new JdbcContext(dataSource);
         StatementStrategy st = new CountStatement();
-        ArrayList<HashMap<String, Object>> list = StatementStrategyForExecute(st);
+        ArrayList<HashMap<String, Object>> list = jdbcContext.StatementStrategyForExecute(st);
         System.out.println(list);
         return Integer.valueOf(String.valueOf(list.get(0).get("count")));
     }
 
 
     public User getById(String id) throws SQLException, ClassNotFoundException {
+        JdbcContext jdbcContext = new JdbcContext(dataSource);
         StatementStrategy st = new SelectStatement(id);
-        ArrayList<HashMap<String, Object>> list = StatementStrategyForExecute(st);
+        ArrayList<HashMap<String, Object>> list = jdbcContext.StatementStrategyForExecute(st);
         User user = null;
         if (list.size() != 0) {
             user = new User();
@@ -69,76 +75,4 @@ public class UserDao {
         return user;
     }
 
-    public void StatementStrategyForUpdate(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
-        Connection c = null;
-        PreparedStatement ps = null;
-        try {
-            c = dataSource.getConnection();
-            ps = stmt.makePreparedStatement(c);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-
-                }
-            }
-        }
-        if (c != null) {
-            try {
-                c.close();
-            } catch (SQLException e) {
-
-            }
-        }
-
-    }
-
-    public ArrayList<HashMap<String, Object>> StatementStrategyForExecute(StatementStrategy stmt) throws SQLException, ClassNotFoundException {
-        ResultSet rs = null;
-        Connection c = null;
-        PreparedStatement ps = null;
-        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
-        try {
-            c = dataSource.getConnection();
-            ps = stmt.makePreparedStatement(c);
-            rs = ps.executeQuery();
-            ResultSetMetaData md = rs.getMetaData();
-            int columns = md.getColumnCount();
-
-            while (rs.next()) {
-                HashMap<String, Object> row = new HashMap<>(columns);
-                for (int i = 1; i <= columns; i++) {
-                    row.put(md.getColumnName(i), rs.getObject(i));
-                }
-                list.add(row);
-            }
-
-            return list;
-        } catch (SQLException e) {
-            throw e;
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (c != null) {
-                try {
-                    c.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
-    }
 }
