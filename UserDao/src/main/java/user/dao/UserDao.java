@@ -16,18 +16,10 @@ public class UserDao {
         this.connectionMaker = connectionMaker;
 
     }
-    //매개변수로 입력받아야 추상화할 수 있다. 객체를 생성할때, 직접 넣어주는 방법이 아니면, 구현클래스를 사용할 수 밖에 없게 됨
-    public int getCount() throws SQLException, ClassNotFoundException {
-        StatementStrategy st = new CountStatement();
-        ArrayList<HashMap<String, Object>> list = StatementStrategyForExecute(st);
-        System.out.println(list);
-        return Integer.valueOf(String.valueOf(list.get(0).get("count")));
-    }
-
 
     public void add(final User user) throws ClassNotFoundException, SQLException {
 
-        StatementStrategyForUpdate(new StatementStrategy(){
+        StatementStrategyForUpdate(new StatementStrategy() {
             public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
                 PreparedStatement ps = c.prepareStatement("INSERT INTO users(id,name,password) values(?,?,?)");
                 ps.setString(1, user.getId());
@@ -48,11 +40,20 @@ public class UserDao {
         });
     }
 
+
+    public int getCount() throws SQLException, ClassNotFoundException {
+        StatementStrategy st = new CountStatement();
+        ArrayList<HashMap<String, Object>> list = StatementStrategyForExecute(st);
+        System.out.println(list);
+        return Integer.valueOf(String.valueOf(list.get(0).get("count")));
+    }
+
+
     public User getById(String id) throws SQLException, ClassNotFoundException {
         StatementStrategy st = new SelectStatement(id);
         ArrayList<HashMap<String, Object>> list = StatementStrategyForExecute(st);
         User user = null;
-        if (list.size()!=0) {
+        if (list.size() != 0) {
             user = new User();
             user.setId(String.valueOf(list.get(0).get("id")));
             user.setName(String.valueOf(list.get(0).get("name")));
@@ -136,4 +137,4 @@ public class UserDao {
             }
         }
     }
-    }
+}
