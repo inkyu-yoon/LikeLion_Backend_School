@@ -17,6 +17,10 @@ import java.util.List;
 public class UserDao {
 
     private final JdbcTemplate jdbcTemplate;
+    public UserDao(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
     RowMapper<User> rowMapper = new RowMapper<User>() {
         @Override
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -26,18 +30,13 @@ public class UserDao {
         }
     };
 
-    public UserDao(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
 
     public void add(final User user) throws ClassNotFoundException, SQLException {
         jdbcTemplate.update("INSERT INTO users(id,name,password) values(?,?,?)", user.getId(), user.getName(), user.getPassword());
-        //메서드(new 인터페이스() {구현부} ) 익명 클래스로 사용, 생성자로 입력받지 않아도, 여러 변수들을 공유할 수 있는 장점이 있다.
     }
 
     public void deleteAll() throws SQLException, ClassNotFoundException {
         jdbcTemplate.update("delete from users");
-
     }
 
 
@@ -53,7 +52,6 @@ public class UserDao {
 
     public List<User> getAll(){
         String sql = "SELECT * FROM USERS ORDER BY id";
-
         return this.jdbcTemplate.query(sql, rowMapper);
     }
 }

@@ -16,12 +16,11 @@ public class UserDaoConfig {
 
     @Bean
     public UserDao userDao() {
-        return new UserDao(dataSource()); //Dconnection이 들어간 userDao가 반환
+        return new UserDao(dataSource());
     }
-    //참고로 지금 userDao는 어떠한 구현 클래스도 의존하고 있지 않다. 매개변수로 쓰이는 객체는 인터페이스이기 때문이다.
-    // userDao는 Dconnection 클래스가 존재하는지조차 모르는 상태이다.
+
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         Map<String, String> env = System.getenv();
 
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
@@ -33,9 +32,5 @@ public class UserDaoConfig {
     }
 
 
-    @Bean
-    public ConnectionMaker realConnectionMaker(){
-        return new DConnectionMaker();
-    }
 }
 
