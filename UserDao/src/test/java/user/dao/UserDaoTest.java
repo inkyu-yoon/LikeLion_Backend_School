@@ -19,6 +19,7 @@ import user.domain.User;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -31,6 +32,17 @@ class UserDaoTest {
     void RunBeforeDelete() throws SQLException, ClassNotFoundException {
         userDao.deleteAll();
     }
+
+    @Test
+    void getAll테스트() throws SQLException, ClassNotFoundException {
+
+
+        userDao.add(new User("123", "inkyu", "12341234"));
+        userDao.add(new User("123312", "inkyu", "12341234"));
+        List<User> list =userDao.getAll();
+        assertThat(list.size()).isEqualTo(2);
+    }
+
 
     @Test
     @DisplayName("insert 랑 select 테스트")
