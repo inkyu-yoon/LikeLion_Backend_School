@@ -3,6 +3,13 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/userdao
+    username: root
+    password: 12341234
+
 logging:
   level:
     root: debug
+
