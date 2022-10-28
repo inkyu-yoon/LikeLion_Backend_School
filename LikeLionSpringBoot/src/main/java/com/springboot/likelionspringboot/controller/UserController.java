@@ -18,7 +18,7 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public void add(@RequestBody Map<String, String> postData) {
 
         User user = new User(postData.get("id"), postData.get("name"), postData.get("password"));
@@ -28,19 +28,19 @@ public class UserController {
 
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteid(@PathVariable String id) {
         userDao.delete(id);
         return id;
     }
 
-    @DeleteMapping("deleteAll")
+    @DeleteMapping("/deleteAll")
     public void deleteAll() {
         userDao.deleteAll();
 
     }
 
-    @GetMapping("selectAll")
+    @GetMapping("/selectAll")
     public String selectAll() {
         StringBuilder sb = new StringBuilder();
         List<User> users = userDao.selectAll();
@@ -49,7 +49,7 @@ public class UserController {
         }
         return sb.toString();
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public String selectById(@PathVariable String id) {
         User user = userDao.selectById(id);
         return user.toString();
