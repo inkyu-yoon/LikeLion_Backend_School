@@ -43,5 +43,8 @@ public class UserDao {
        return jdbcTemplate.query("SELECT * FROM USERS", rowMapper);
     }
 
+    public User selectById(String id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE ID = ? ", rowMapper,id);
+    }
 
 }

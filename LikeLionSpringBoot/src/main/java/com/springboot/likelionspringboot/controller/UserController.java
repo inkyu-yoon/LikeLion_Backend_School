@@ -49,4 +49,9 @@ public class UserController {
         }
         return sb.toString();
     }
+    @GetMapping("{id}")
+    public String selectById(@PathVariable String id) {
+        User user = userDao.selectById(id);
+        return user.toString();
+    }
 }
