@@ -2,10 +2,7 @@ package com.springboot.likelionspringboot.controller;
 
 import com.springboot.likelionspringboot.dao.UserDao;
 import com.springboot.likelionspringboot.domain.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -27,5 +24,11 @@ public class UserController {
 
         System.out.println(user + "등록하였습니다.");
 
+    }
+
+    @DeleteMapping("users/{id}")
+    public String deleteid(@PathVariable String id) {
+        userDao.delete(id);
+        return id;
     }
 }
