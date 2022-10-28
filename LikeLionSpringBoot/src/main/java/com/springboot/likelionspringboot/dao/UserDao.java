@@ -24,7 +24,7 @@ public class UserDao {
         jdbcTemplate.update("DELETE FROM USERS WHERE id = ?", id);
     }
     public void deleteAll() {
-        jdbcTemplate.update("DELETE * FROM USERS");
+        jdbcTemplate.update("DELETE FROM USERS");
     }
 
 

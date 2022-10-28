@@ -31,4 +31,10 @@ public class UserController {
         userDao.delete(id);
         return id;
     }
+
+    @DeleteMapping("users/deleteAll")
+    public void deleteAll() {
+        userDao.deleteAll();
+
+    }
 }
