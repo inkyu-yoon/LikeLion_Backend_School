@@ -1,12 +1,14 @@
 package com.springboot.likelionspringboot.controller;
 
 import com.springboot.likelionspringboot.dto.MemberDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/get-api")
+@Slf4j
 public class GetController {
 
     @GetMapping("hello")
@@ -16,7 +18,7 @@ public class GetController {
 
     @GetMapping("{var}")
     public String getvar(@PathVariable String var) {
-
+        log.info("getVar 로 요청이 들어왔습니다. var:{}",var);
         return var;
     }
 
