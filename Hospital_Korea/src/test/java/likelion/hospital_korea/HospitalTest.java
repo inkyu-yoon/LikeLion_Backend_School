@@ -7,6 +7,7 @@ import likelion.hospital_korea.dao.HospitalDao;
 import likelion.hospital_korea.domain.Hospital;
 import org.apache.catalina.core.ApplicationContext;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,10 +26,15 @@ class HospitalTest {
 
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(HospitalConfig.class);
     ReadLineContext rc = ac.getBean("hospitalReadLineContext", ReadLineContext.class);
+    HospitalDao hospitalDao = ac.getBean("hospitalDao", HospitalDao.class);
 
+    @BeforeEach
+    void beforeEach(){
+        hospitalDao.deleteAll();
+    }
 
     @Test
-    @DisplayName("parseTest")
+    @DisplayName("parseTest + data mysql에 입력 ")
     void parse() throws IOException {
 
 
@@ -52,13 +58,38 @@ class HospitalTest {
         assertEquals(52.29f, hospital.getTotalAreaSize()); //col:32
         System.out.println(hospital);
 
+
+    }
+
+    @Test
+    @DisplayName("MYSQL에 데이터 입력 테스트")
+    void insertAll() throws IOException {
+        List<Hospital> list = rc.readByLine("fulldata.txt");
+        hospitalDao.add(list.get(1));
+//        for (int i = 0; i < list.size(); i++) {
+//            System.out.println(i);
+//            hospitalDao.add(list.get(i));
+//        }
+
+
+    }
+
+
+
+    @Test
+    @DisplayName("deleteAll 테스트")
+    void deleteAll() {
+
+        hospitalDao.deleteAll();
     }
 
     @Test
     @DisplayName("10만건이 넘는 데이터인가")
     void countTest() throws IOException {
+
         List<Hospital> list = rc.readByLine("fulldata.txt");
         assertThat(list.size() > 100000).isTrue();
-
     }
+
+
 }

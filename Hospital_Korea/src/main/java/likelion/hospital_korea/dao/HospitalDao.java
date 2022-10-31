@@ -44,7 +44,7 @@ public class HospitalDao {
 
     public void add(Hospital hospital) {
         jdbcTemplate.update(
-                        "INSERT INTO `inkyu-db`.`Hospital`\n" +
+                        "INSERT INTO `inkyu-db`.`nation_wide_hospitals`\n" +
                         "(`id`,\n" +
                         "`open_service_name`,\n" +
                         "`open_local_government_code`,\n" +
@@ -61,8 +61,7 @@ public class HospitalDao {
                         "`patient_room_count`,\n" +
                         "`total_number_of_beds`,\n" +
                         "`total_area_size`)\n" +
-                        "VALUES\n" +
-                        "(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
+                        "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",
                 hospital.getId(), hospital.getOpenServiceName(), hospital.getOpenLocalGovernmentCode()
                 , hospital.getManagementNumber(), hospital.getLicenseDate(), hospital.getBusinessStatus(), hospital.getBusinessStatusCode()
                 , hospital.getPhone(), hospital.getFullAddress(), hospital.getRoadNameAddress(), hospital.getHospitalName(), hospital.getBusinessTypeName()
@@ -70,14 +69,14 @@ public class HospitalDao {
     }
 
     public void delete(String id) {
-        jdbcTemplate.update("DELETE FROM `inkyu-db`.`Hospital` WHERE id = ?", id);
+        jdbcTemplate.update("DELETE FROM `inkyu-db`.`nation_wide_hospitals` WHERE id = ?", id);
     }
     public void deleteAll() {
-        jdbcTemplate.update("DELETE FROM `inkyu-db`.`Hospital`");
+        jdbcTemplate.update("DELETE FROM `inkyu-db`.`nation_wide_hospitals`");
     }
 
     public List<Hospital> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM `inkyu-db`.`Hospital`", rowMapper);
+        return jdbcTemplate.query("SELECT * FROM `inkyu-db`.`nation_wide_hospitals`", rowMapper);
     }
 
     public Hospital selectById(String id) {
