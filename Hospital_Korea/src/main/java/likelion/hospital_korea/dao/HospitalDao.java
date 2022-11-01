@@ -84,6 +84,6 @@ public class HospitalDao {
     }
 
     public Hospital selectById(String id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM `inkyu-db`.`Hospital` WHERE ID = ? ", rowMapper,id);
+        return jdbcTemplate.queryForObject("SELECT * FROM `inkyu-db`.`nation_wide_hospitals` WHERE ID = ? ", rowMapper,id);
     }
 }

@@ -3,6 +3,7 @@ package likelion.hospital_korea;
 import likelion.hospital_korea.Parser.ReadLineContext;
 import likelion.hospital_korea.dao.HospitalDao;
 import likelion.hospital_korea.domain.Hospital;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ class HospitalTest {
 
 
     @Test
-    @DisplayName("parseTest + data mysql에 입력 ")
+    @DisplayName("add and get")
     void parse() throws IOException {
 
 
@@ -78,8 +79,10 @@ class HospitalTest {
         assertEquals(0, hospital.getPatientRoomCount()); //col:30
         assertEquals(0, hospital.getTotalNumberOfBeds()); //col:31
         assertEquals(52.29f, hospital.getTotalAreaSize()); //col:32
-        System.out.println(hospital);
-
+        //System.out.println(hospital);
+        hospitalDao.add(hospital);
+        Hospital findHospital = hospitalDao.selectById("1");
+        assertThat(findHospital.getId()).isEqualTo(1);
 
     }
 
