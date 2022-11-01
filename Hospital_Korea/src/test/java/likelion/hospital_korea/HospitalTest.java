@@ -1,5 +1,6 @@
 package likelion.hospital_korea;
 
+import likelion.hospital_korea.JPA.HospitalJPA;
 import likelion.hospital_korea.Parser.ReadLineContext;
 import likelion.hospital_korea.dao.HospitalDao;
 import likelion.hospital_korea.domain.Hospital;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -91,6 +93,28 @@ class HospitalTest {
         assertThat(hospitalDao.getCount()).isEqualTo(1);
     }
 
+    @Test
+    @DisplayName("jpa로 불러오기")
+    void createQuery(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hospital");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction ts = em.getTransaction();
+
+        ts.begin();
+        try {
+            List<HospitalJPA> results = em.createQuery("select data from HospitalJPA as data", HospitalJPA.class)
+                            .setFirstResult(0).setMaxResults(1).getResultList();
+            assertThat(results.get(0).getId()).isEqualTo(1);
+        } catch (Exception e) {
+            //에러 생기면 트랜잭션 시작하기 전 상황으로 되돌리기
+            ts.rollback();
+        } finally {
+            //em이 비정상적인 오류가 생겨도 닫힐 수 있어야 함
+            em.close();
+        }
+        emf.close();
+
+    }
 
 
     @Test
