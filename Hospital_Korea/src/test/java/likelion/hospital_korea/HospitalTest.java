@@ -1,19 +1,13 @@
 package likelion.hospital_korea;
 
-import likelion.hospital_korea.Parser.HospitalParser;
-import likelion.hospital_korea.Parser.Parser;
 import likelion.hospital_korea.Parser.ReadLineContext;
 import likelion.hospital_korea.dao.HospitalDao;
 import likelion.hospital_korea.domain.Hospital;
-import org.apache.catalina.core.ApplicationContext;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,6 +26,17 @@ class HospitalTest {
     void beforeEach(){
         hospitalDao.deleteAll();
     }
+
+
+    @Test
+    @DisplayName("row 한개만 읽어오기 테스트")
+    void testOneLine() throws IOException {
+        List<Hospital> list = rc.readByOneLine("fulldata.txt");
+        Hospital hospital = list.get(0);
+
+    }
+
+
 
     @Test
     @DisplayName("parseTest + data mysql에 입력 ")

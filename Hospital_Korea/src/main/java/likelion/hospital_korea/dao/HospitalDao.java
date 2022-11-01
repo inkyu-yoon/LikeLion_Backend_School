@@ -9,14 +9,18 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Repository
 public class HospitalDao {
+
 
     private final JdbcTemplate jdbcTemplate;
 
     public HospitalDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+
     }
 
     RowMapper<Hospital> rowMapper = new RowMapper<Hospital>() {
