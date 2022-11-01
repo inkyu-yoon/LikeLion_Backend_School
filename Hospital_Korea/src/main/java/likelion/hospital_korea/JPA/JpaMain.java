@@ -23,10 +23,10 @@ public class JpaMain {
         HospitalJPA hospital = null;
         ts.begin();
         try {
-            List<HospitalJPA> results = rc.readByOneLine("fulldata.txt");
-            hospital = results.get(0);
-            em.persist(hospital);
-
+            List<HospitalJPA> results = rc.readByLine("fulldata.txt");
+            for (HospitalJPA result : results) {
+                em.persist(result);
+            }
             ts.commit();
         } catch (Exception e) {
             //에러 생기면 트랜잭션 시작하기 전 상황으로 되돌리기

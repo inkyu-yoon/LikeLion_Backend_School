@@ -29,11 +29,28 @@ class HospitalTest {
 
 
     @Test
-    @DisplayName("row 한개만 읽어오기 테스트")
+    @DisplayName("다 읽어오기 테스트")
     void testOneLine() throws IOException {
-        List<Hospital> list = rc.readByOneLine("fulldata.txt");
-        Hospital hospital = list.get(0);
+        List<Hospital> list = rc.readByLine("fulldata.txt");
+        for (Hospital hospital : list) {
+            if (hospital.getHospitalName().length() >= 30) {
+                System.out.println(" 인덱스: " + hospital.getId() + "/ 이름 :" + hospital.getHospitalName() + "/ 이름 길이:" + hospital.getHospitalName().length()
+                );
+            }
+            if (hospital.getHealthcareProviderCount() >= 127) {
+                System.out.println(" 인덱스: " + hospital.getId() + "/ 의료인 수(health_care_provider) :" + hospital.getHealthcareProviderCount()
+                );
+            }
+            if (hospital.getTotalNumberOfBeds() >= 127) {
+                System.out.println(" 인덱스: " + hospital.getId() + "/ 병상수(total_number_of_beds) :" + hospital.getTotalNumberOfBeds()
+                );
+            }
+            if (hospital.getPatientRoomCount() >= 127) {
+                System.out.println(" 인덱스: " + hospital.getId() + "/ 입원실 수(patient_room) :" + hospital.getPatientRoomCount()
+                );
+            }
 
+        }
     }
 
 
