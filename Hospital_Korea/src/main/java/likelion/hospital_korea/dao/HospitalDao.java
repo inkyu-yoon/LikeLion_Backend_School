@@ -82,6 +82,9 @@ public class HospitalDao {
     public List<Hospital> selectAll() {
         return jdbcTemplate.query("SELECT * FROM `inkyu-db`.`nation_wide_hospitals`", rowMapper);
     }
+    public int getCount() {
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) as count FROM `inkyu-db`.`nation_wide_hospitals` ", Integer.class);
+    }
 
     public Hospital selectById(String id) {
         return jdbcTemplate.queryForObject("SELECT * FROM `inkyu-db`.`nation_wide_hospitals` WHERE ID = ? ", rowMapper,id);

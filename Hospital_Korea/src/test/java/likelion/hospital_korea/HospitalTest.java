@@ -57,7 +57,7 @@ class HospitalTest {
 
 
     @Test
-    @DisplayName("add and get")
+    @DisplayName("add and get and count")
     void parse() throws IOException {
 
 
@@ -79,12 +79,19 @@ class HospitalTest {
         assertEquals(0, hospital.getPatientRoomCount()); //col:30
         assertEquals(0, hospital.getTotalNumberOfBeds()); //col:31
         assertEquals(52.29f, hospital.getTotalAreaSize()); //col:32
-        //System.out.println(hospital);
+
+        //add가 되었다면
         hospitalDao.add(hospital);
+
+        //id 1을 가진 레코드가 있을 것, 그리고 그 레코드를 불러왔을 때 아이디가 1인가?
         Hospital findHospital = hospitalDao.selectById("1");
         assertThat(findHospital.getId()).isEqualTo(1);
 
+        //1개를 등록했으므로 getCount 하면 1이 나올 것
+        assertThat(hospitalDao.getCount()).isEqualTo(1);
     }
+
+
 
     @Test
     @DisplayName("MYSQL에 데이터 입력 테스트")
