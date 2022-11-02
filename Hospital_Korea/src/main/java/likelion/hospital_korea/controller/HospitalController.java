@@ -10,6 +10,8 @@ import likelion.hospital_korea.dao.HospitalDao;
 import likelion.hospital_korea.domain.Hospital;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/hospital")
@@ -27,14 +30,20 @@ public class HospitalController {
 
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(HospitalConfig.class);
     HospitalDao hospitalDao = ac.getBean("hospitalDao", HospitalDao.class);
+
     @GetMapping("/{id}")
-    public Hospital get(@PathVariable(value = "id") String id) {
-        return hospitalDao.selectById(id);
+    public ResponseEntity<Hospital> get(@PathVariable(value = "id") String id) {
+        Optional<Hospital> opt = Optional.of(hospitalDao.selectById(id));
+        if (!opt.isEmpty()) {
+            return ResponseEntity.ok().body(hospitalDao.selectById(id));
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Hospital());
+        }
     }
 
     //jpa로 넣어놓은 데이터 jpa로 get 하기
     @GetMapping("/jpa/{id}")
-    public HospitalJPA getByJpa(@PathVariable(value = "id") int id) {
+    public ResponseEntity<HospitalJPA> getByJpa(@PathVariable(value = "id") int id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hospital");
         EntityManager em = emf.createEntityManager();
         EntityTransaction ts = em.getTransaction();
@@ -52,7 +61,12 @@ public class HospitalController {
             em.close();
         }
         emf.close();
+        Optional<HospitalJPA> opt = Optional.of(hospitalJPA);
+        if (!opt.isEmpty()) {
+            return ResponseEntity.ok().body(hospitalJPA);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new HospitalJPA());
+        }
 
-        return hospitalJPA;
     }
 }
