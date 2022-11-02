@@ -1,7 +1,6 @@
 package likelion.hospital_korea.Parser;
 
 import likelion.hospital_korea.domain.Hospital;
-import org.springframework.data.relational.core.sql.In;
 
 import java.time.LocalDateTime;
 
