@@ -1,9 +1,11 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/inkyu-db
+    url: jdbc:mysql://ec2-3-38-111-117.ap-northeast-2.compute.amazonaws.com:3306/inkyu-db
     username: ${DB_USER}
     password: ${DB_PASSWORD}
 
   main:
     allow-bean-definition-overriding: true
+
+

@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name="hospital")
 @Getter @Setter
 @ToString
 public class HospitalJPA {
