@@ -32,23 +32,22 @@ public class Hospital {
 
     @Override
     public String toString() {
-        return "Hospital{" +
-                "id=" + id +
-                ", openServiceName='" + openServiceName + '\'' +
-                ", openLocalGovernmentCode=" + openLocalGovernmentCode +
-                ", managementNumber='" + managementNumber + '\'' +
-                ", licenseDate='" + licenseDate + '\'' +
-                ", businessStatus=" + businessStatus +
-                ", businessStatusCode=" + businessStatusCode +
-                ", phone='" + phone + '\'' +
-                ", fullAddress='" + fullAddress + '\'' +
-                ", roadNameAddress='" + roadNameAddress + '\'' +
-                ", hospitalName='" + hospitalName + '\'' +
-                ", businessTypeName='" + businessTypeName + '\'' +
-                ", healthcareProviderCount=" + healthcareProviderCount +
-                ", patientRoomCount=" + patientRoomCount +
-                ", totalNumberOfBeds=" + totalNumberOfBeds +
-                ", totalAreaSize=" + totalAreaSize +
-                '}';
+        return  "id=" + id +
+                "\n openServiceName='" + openServiceName + '\'' +
+                "\n openLocalGovernmentCode=" + openLocalGovernmentCode +
+                "\n managementNumber='" + managementNumber + '\'' +
+                "\n licenseDate='" + licenseDate + '\'' +
+                "\n businessStatus=" + businessStatus +
+                "\n businessStatusCode=" + businessStatusCode +
+                "\n phone='" + phone + '\'' +
+                "\n fullAddress='" + fullAddress + '\'' +
+                "\n roadNameAddress='" + roadNameAddress + '\'' +
+                "\n hospitalName='" + hospitalName + '\'' +
+                "\n businessTypeName='" + businessTypeName + '\'' +
+                "\n healthcareProviderCount=" + healthcareProviderCount +
+                "\n patientRoomCount=" + patientRoomCount +
+                "\n totalNumberOfBeds=" + totalNumberOfBeds +
+                "\n totalAreaSize=" + totalAreaSize;
+
     }
 }
