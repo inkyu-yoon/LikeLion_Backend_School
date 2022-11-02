@@ -25,6 +25,9 @@ public class JpaMain {
         try {
             List<HospitalJPA> results = rc.readByLine("fulldata.txt");
             for (HospitalJPA result : results) {
+                if (result.getId() == 1000) {
+                    break;
+                }
                 em.persist(result);
             }
             ts.commit();

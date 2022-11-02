@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://ec2-3-38-111-117.ap-northeast-2.compute.amazonaws.com:3306/inkyu-db
+    url: jdbc:mysql://ec2-52-68-62-152.ap-northeast-1.compute.amazonaws.com/:3306/inkyu-db
     username: root
     password: ${DB_PASSWORD}
 

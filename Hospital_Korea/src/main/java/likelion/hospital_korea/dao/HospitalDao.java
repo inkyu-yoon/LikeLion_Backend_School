@@ -9,8 +9,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 @Repository
 public class HospitalDao {
@@ -48,7 +47,7 @@ public class HospitalDao {
 
     public void add(Hospital hospital) {
         jdbcTemplate.update(
-                        "INSERT INTO `inkyu-db`.`nation_wide_hospitals`\n" +
+                        "INSERT INTO `inkyu-db`.`hospital`\n" +
                         "(`id`,\n" +
                         "`open_service_name`,\n" +
                         "`open_local_government_code`,\n" +
@@ -73,20 +72,20 @@ public class HospitalDao {
     }
 
     public void delete(String id) {
-        jdbcTemplate.update("DELETE FROM `inkyu-db`.`nation_wide_hospitals` WHERE id = ?", id);
+        jdbcTemplate.update("DELETE FROM `inkyu-db`.`hospital` WHERE id = ?", id);
     }
     public void deleteAll() {
-        jdbcTemplate.update("DELETE FROM `inkyu-db`.`nation_wide_hospitals`");
+        jdbcTemplate.update("DELETE FROM `inkyu-db`.`hospital`");
     }
 
     public List<Hospital> selectAll() {
-        return jdbcTemplate.query("SELECT * FROM `inkyu-db`.`nation_wide_hospitals`", rowMapper);
+        return jdbcTemplate.query("SELECT * FROM `inkyu-db`.`hospital`", rowMapper);
     }
     public int getCount() {
-        return jdbcTemplate.queryForObject("SELECT COUNT(*) as count FROM `inkyu-db`.`nation_wide_hospitals` ", Integer.class);
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) as count FROM `inkyu-db`.`hospital` ", Integer.class);
     }
 
     public Hospital selectById(String id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM `inkyu-db`.`nation_wide_hospitals` WHERE ID = ? ", rowMapper,id);
+        return jdbcTemplate.queryForObject("SELECT * FROM `inkyu-db`.`hospital` WHERE ID = ? ", rowMapper,id);
     }
 }
