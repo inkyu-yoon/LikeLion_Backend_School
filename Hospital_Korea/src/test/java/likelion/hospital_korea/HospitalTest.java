@@ -1,9 +1,12 @@
 package likelion.hospital_korea;
 
 import likelion.hospital_korea.JPA.HospitalJPA;
+import likelion.hospital_korea.JPA.HospitalJPAParser;
+import likelion.hospital_korea.Parser.Parser;
 import likelion.hospital_korea.Parser.ReadLineContext;
 import likelion.hospital_korea.dao.HospitalDao;
 import likelion.hospital_korea.domain.Hospital;
+import likelion.hospital_korea.service.HospitalService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -25,12 +28,22 @@ class HospitalTest {
     ReadLineContext rc = ac.getBean("hospitalReadLineContext", ReadLineContext.class);
     HospitalDao hospitalDao = ac.getBean("hospitalDao", HospitalDao.class);
 
+    HospitalService hospitalService = new HospitalService(rc, hospitalDao);
     @BeforeEach
     void beforeEach(){
         hospitalDao.deleteAll();
     }
 
 
+    @Test
+    @DisplayName("MYSQL에 데이터 입력 테스트")
+    void insertAll() throws IOException {
+
+        int count = hospitalService.insertHospitalData("fulldata.txt");
+        System.out.println(count);
+
+
+    }
     @Test
     @DisplayName("다 읽어오기 테스트")
     void testOneLine() throws IOException {
@@ -94,17 +107,22 @@ class HospitalTest {
     }
 
     @Test
-    @DisplayName("jpa로 불러오기")
+    @DisplayName("jpa로 입력")
     void createQuery(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hospital");
         EntityManager em = emf.createEntityManager();
         EntityTransaction ts = em.getTransaction();
 
+        Parser parser = new HospitalJPAParser();
+        ReadLineContext<HospitalJPA> rc1 = new ReadLineContext<>(parser);
+
         ts.begin();
         try {
-            List<HospitalJPA> results = em.createQuery("select data from HospitalJPA as data", HospitalJPA.class)
-                            .setFirstResult(0).setMaxResults(1).getResultList();
-            assertThat(results.get(0).getId()).isEqualTo(1);
+            List<HospitalJPA> results = rc1.readByLine("fulldata.txt");
+            for (HospitalJPA result : results) {
+                em.persist(result);
+            }
+            ts.commit();
         } catch (Exception e) {
             //에러 생기면 트랜잭션 시작하기 전 상황으로 되돌리기
             ts.rollback();
@@ -117,18 +135,7 @@ class HospitalTest {
     }
 
 
-    @Test
-    @DisplayName("MYSQL에 데이터 입력 테스트")
-    void insertAll() throws IOException {
-        List<Hospital> list = rc.readByLine("fulldata.txt");
-        hospitalDao.add(list.get(1));
-//        for (int i = 0; i < list.size(); i++) {
-//            System.out.println(i);
-//            hospitalDao.add(list.get(i));
-//        }
 
-
-    }
 
 
 
