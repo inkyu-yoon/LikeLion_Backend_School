@@ -7,8 +7,8 @@
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="password"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-52-68-62-152.ap-northeast-1.compute.amazonaws.com:3306/inkyu-db"/>
+            <property name="javax.persistence.jdbc.password" value="1q2w3e4r"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-3-38-111-117.ap-northeast-2.compute.amazonaws.com/inkyu-db"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 
             <!-- 옵션 -->
