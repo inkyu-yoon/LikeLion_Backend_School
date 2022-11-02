@@ -7,6 +7,7 @@ import likelion.hospital_korea.JPA.HospitalJPAParser;
 import likelion.hospital_korea.Parser.Parser;
 import likelion.hospital_korea.Parser.ReadLineContext;
 import likelion.hospital_korea.dao.HospitalDao;
+import likelion.hospital_korea.domain.Hospital;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,13 +28,13 @@ public class HospitalController {
     AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(HospitalConfig.class);
     HospitalDao hospitalDao = ac.getBean("hospitalDao", HospitalDao.class);
     @GetMapping("/{id}")
-    public String get(@PathVariable(value = "id") String id) {
-        return hospitalDao.selectById(id).toString();
+    public Hospital get(@PathVariable(value = "id") String id) {
+        return hospitalDao.selectById(id);
     }
 
     //jpa로 넣어놓은 데이터 jpa로 get 하기
     @GetMapping("/jpa/{id}")
-    public String getByJpa(@PathVariable(value = "id") int id) {
+    public HospitalJPA getByJpa(@PathVariable(value = "id") int id) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hospital");
         EntityManager em = emf.createEntityManager();
         EntityTransaction ts = em.getTransaction();
@@ -52,6 +53,6 @@ public class HospitalController {
         }
         emf.close();
 
-        return hospitalJPA.toString();
+        return hospitalJPA;
     }
 }
