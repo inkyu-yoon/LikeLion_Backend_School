@@ -2,6 +2,7 @@ package likelion.hospital_korea.JPA;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
+@ToString
 public class HospitalJPA {
     @Id
     private int id;
