@@ -2,6 +2,7 @@ package mustache.practice.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import mustache.practice.domain.ArticleDto;
+import mustache.practice.domain.entity.Article;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ public class ArticleController {
     @PostMapping(value = "/posts")
     public String newArticleForm(ArticleDto form) {
         log.info(form.toString());
+        Article article = form.toEntity();
         return "";
     }
 }

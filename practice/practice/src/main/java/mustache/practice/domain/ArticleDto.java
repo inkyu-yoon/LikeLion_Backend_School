@@ -1,6 +1,7 @@
 package mustache.practice.domain;
 
 import lombok.Getter;
+import mustache.practice.domain.entity.Article;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Getter
@@ -22,5 +23,8 @@ public class ArticleDto {
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 '}';
+    }
+    public Article toEntity(){
+        return new Article(title, content);
     }
 }
