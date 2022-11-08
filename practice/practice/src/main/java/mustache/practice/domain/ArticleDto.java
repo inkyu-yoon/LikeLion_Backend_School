@@ -8,20 +8,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ArticleDto {
 
     private String title;
+    private String contents;
 
 
-    public ArticleDto( String title) {
+    public ArticleDto( String title,String contents) {
 
         this.title = title;
+        this.contents = contents;
     }
 
     @Override
     public String toString() {
         return "ArticleDto{" +
                 "title='" + title + '\'' +
+                ", contents='" + contents + '\'' +
                 '}';
     }
+
     public Article toEntity(){
-        return new Article(this.title);
+        return new Article(this.title,this.contents);
     }
 }
