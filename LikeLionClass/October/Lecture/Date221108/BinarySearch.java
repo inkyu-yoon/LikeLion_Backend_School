@@ -6,16 +6,16 @@ public class BinarySearch {
 
         int target = 8;
         int start = 0;
-        int end = nums.length;
+        int end = nums.length-1;
 
         while (true) {
             //중간값 찾기
             int midPoint = (start + end) / 2;
 
             if (nums[midPoint] > target) {
-                end = midPoint;
+                end = midPoint-1;
             } else if(nums[midPoint]<target) {
-                start = midPoint;
+                start = midPoint+1;
             } else if (nums[midPoint] == target) {
                 System.out.println("index : "+midPoint);
                 break;
