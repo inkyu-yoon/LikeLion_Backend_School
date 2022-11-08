@@ -1,10 +1,22 @@
-
-
 <div>
     <body>
     {{>layouts/header}}
+            <form class = "container">
 
-    <h4>{{article}} </h4>
+                {{#article}}
+
+                    게시글 번호 : {{id}}
+                    <br>
+                    게시글 제목 : {{title}}
+                    <br>
+                    게시글 내용 : {{contents}}
+
+                {{/article}}
+
+
+            </form>
+
+
 
 
 
