@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,9 +25,22 @@ public class ArticleController {
         return "articles/new";
     }
 
+    @GetMapping("/list")
+    public String list(Model model){
+        List<Article> articles = articleRepository.findAll();
+        model.addAttribute("articles", articles);
+        return "articles/list";
+    }
+
+    @GetMapping("")
+    public String show(){
+        return "redirect:/articles/list";
+    }
+
     @GetMapping(value = "/{id}")
     public String selectSingle(@PathVariable(name = "id") Long id, Model model) {
-            Optional<Article> optArticle = articleRepository.findById(id);
+
+        Optional<Article> optArticle = articleRepository.findById(id);
         if (!optArticle.isEmpty()) {
             model.addAttribute("article", optArticle.get());
             return "articles/show";

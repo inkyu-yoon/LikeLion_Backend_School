@@ -1,17 +1,27 @@
+{{>layouts/header}}
 <div>
     <body>
-    {{>layouts/header}}
+
             <form class = "container">
                 {{#article}}
 
-                    게시글 번호 : {{id}}
-                    <br>
-                    게시글 제목 : {{title}}
-                    <br>
-                    게시글 내용 : {{contents}}
+                        <ul class="list-group">
+                            <li class="list-group-item active" aria-current="true">{{id}}. {{title}}</li>
+                            <li class="list-group-item">  {{contents}}</li>
+                            <br>
+
+                        </ul>
 
                 {{/article}}
             </form>
-    {{>layouts/footer}}
+    <form class = "container" form action="/articles/list" method="get">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="submit">게시글 전체 조회</button>
+        </div>
+    </form>
+
     </body>
 </div>
+{{>layouts/footer}}
+
+
