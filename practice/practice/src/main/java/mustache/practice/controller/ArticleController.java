@@ -41,6 +41,6 @@ public class ArticleController {
         log.info(articleDto.getContents());
         Article savedArticle = articleRepository.save((articleDto.toEntity()));
         log.info("generatedId:{}", savedArticle.getId());
-        return "";
+        return "redirect:/articles/" + savedArticle.getId();
     }
 }
