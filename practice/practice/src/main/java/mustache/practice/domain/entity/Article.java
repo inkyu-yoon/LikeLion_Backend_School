@@ -17,8 +17,16 @@ public class Article {
     private String title;
     private String contents;
 
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", contents='" + contents + '\'' +
+                '}';
+    }
 
-    public Article(String title,String contents) {
+    public Article(String title, String contents) {
         this.title = title;
         this.contents = contents;
     }
