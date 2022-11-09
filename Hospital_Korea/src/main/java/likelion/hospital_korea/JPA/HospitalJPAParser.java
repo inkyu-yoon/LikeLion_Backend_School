@@ -2,7 +2,6 @@ package likelion.hospital_korea.JPA;
 
 
 import likelion.hospital_korea.Parser.Parser;
-import likelion.hospital_korea.domain.Hospital;
 
 import java.time.LocalDateTime;
 
