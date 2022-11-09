@@ -5,6 +5,8 @@ import hospital.create_page.parser.HospitalParser;
 import hospital.create_page.parser.Parser;
 import hospital.create_page.parser.ReadLine;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
@@ -18,16 +20,39 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class HospitalService {
+@NoArgsConstructor
+public class HospitalService{
+    EntityManagerFactory emf ;
+    EntityManager em;
+    EntityTransaction ts;
 
+    public HospitalService(String unitName) {
+        this.emf = Persistence.createEntityManagerFactory(unitName);
+        this.em = this.emf.createEntityManager();
+        this.ts = this.em.getTransaction();
+    }
 
+    public Hospital findById(Long id) {
+        ts.begin();
+        Hospital findHospital =null;
+        try {
+             findHospital = em.find(Hospital.class, id);
 
+            ts.commit();
+
+        } catch (Exception e) {
+            ts.rollback();
+        }finally {
+            em.close();
+        }
+        emf.close();
+
+        return findHospital;
+
+    }
 
     @Transactional
     public int insertLargeVolumeHospitalData(String filename) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hospital");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction ts = em.getTransaction();
 
         Parser parser = new HospitalParser();
         ReadLine<Hospital> rc = new ReadLine<>(parser);
@@ -37,18 +62,15 @@ public class HospitalService {
         List<Hospital> hospitalList;
         try {
             hospitalList = rc.readByLine(filename);
-            Hospital hospital = hospitalList.get(10);
-            em.persist(hospital);
-
-//            hospitalList.stream()
-//                    .forEach(hospital -> {
-//                        try {
-//                            em.persist(hospital); // db에 insert하는 구간
-//                        } catch (Exception e) {
-//                            System.out.printf("id:%d 레코드에 문제가 있습니다.\n",hospital.getId());
-//                            throw new RuntimeException(e);
-//                        }
-//                    });
+            hospitalList.stream()
+                    .forEach(hospital -> {
+                        try {
+                            em.persist(hospital); // db에 insert하는 구간
+                        } catch (Exception e) {
+                            System.out.printf("id:%d 레코드에 문제가 있습니다.\n",hospital.getId());
+                            throw new RuntimeException(e);
+                        }
+                    });
 
             ts.commit();
         } catch (IOException e) {
