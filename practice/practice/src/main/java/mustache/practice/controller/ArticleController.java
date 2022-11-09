@@ -61,6 +61,15 @@ public class ArticleController {
             return "articles/error";
         }
     }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable(name = "id") Long id, ArticleDto articleDto,Model model) {
+        log.info("{} {} ", articleDto.getTitle(), articleDto.getContents());
+        Article article = articleRepository.save(articleDto.toEntity());
+        model.addAttribute("article", article);
+        return "redirect:/articles/"+article.getId();
+    }
+
     @PostMapping("")
     public String add(ArticleDto articleDto) {
         log.info(articleDto.getTitle());
