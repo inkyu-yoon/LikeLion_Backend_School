@@ -1,0 +1,7 @@
+{{#article}}
+    <form class = "container" form action="/articles/{{id}}" method = "put">
+        <input type = "text" name ="title" value="{{title}}"/>
+        <textarea rows = "11" name = "content" value = "{{contents}}">{{contents}}</textarea>
+    </form>
+    <a href="/articles"> 목록 </a>
+{{/article}}
