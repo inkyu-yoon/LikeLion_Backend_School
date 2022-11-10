@@ -36,7 +36,7 @@ public class Solution {
             int tmp = arr[i];
             if (arr[i] != arr[i + 1]) {
                 tmp = arr[i + 1];
-                stack.add(tmp);
+                stack.push(tmp);
             }
         }
         answer = new int[stack.size()];
