@@ -9,6 +9,7 @@ public class Solution {
         System.out.println(Arrays.toString(s.solution(arr)));
 
     }
+    //스택 안쓰고
     public int[] solution(int []arr) {
         int[] answer = {};
         List<Integer> list = new ArrayList<>();
@@ -26,4 +27,23 @@ public class Solution {
         }
         return answer;
     }
+
+    public int[] solution2(int []arr) {
+        int[] answer = {};
+        Stack<Integer> stack = new Stack<>();
+        stack.add(arr[0]);
+        for (int i = 0; i < arr.length-1; i++) {
+            int tmp = arr[i];
+            if (arr[i] != arr[i + 1]) {
+                tmp = arr[i + 1];
+                stack.add(tmp);
+            }
+        }
+        answer = new int[stack.size()];
+        for (int i = 0; i < stack.size(); i++) {
+            answer[i] = stack.get(i);
+        }
+        return answer;
+    }
+
 }
