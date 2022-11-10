@@ -5,10 +5,46 @@ import java.util.*;
 public class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[] arr = {1, 1, 3, 3, 0, 1, 1};
-        System.out.println(Arrays.toString(s.solution(arr)));
+        int[] arr = {95,94};
+        int[] arr2 = {3,3};
+        System.out.println(Arrays.toString(s.solution3(arr,arr2)));
 
     }
+    //기능개발
+
+    public int[] solution3(int[] progresses, int[] speeds) {
+        int[] answer = {};
+        Queue<Integer> q = new LinkedList<>();
+        Queue<Integer> ans = new LinkedList<>();
+        for (int i = 0; i < progresses.length; i++) {
+            q.offer((int)Math.ceil((double)(100 - progresses[i]) / speeds[i]));
+        }
+        for (Integer integer : q) {
+            System.out.println(integer);
+        }
+
+        while (!q.isEmpty()) {
+            int count = 0;
+            int max = q.peek();
+
+            while (max >= q.peek()) {
+                count++;
+                q.poll();
+                if (q.isEmpty()) {
+                    break;
+                }
+            }
+
+            ans.offer(count);
+        }
+        answer = new int[ans.size()];
+        for (int i = 0; i < answer.length; i++) {
+            answer[i] = ans.poll();
+        }
+        return answer;
+    }
+
+
     //스택 안쓰고
     public int[] solution(int []arr) {
         int[] answer = {};
@@ -27,6 +63,9 @@ public class Solution {
         }
         return answer;
     }
+
+
+//스택 쓰고
 
     public int[] solution2(int []arr) {
         int[] answer = {};
