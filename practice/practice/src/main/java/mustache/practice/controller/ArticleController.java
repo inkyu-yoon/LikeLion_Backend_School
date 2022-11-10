@@ -79,8 +79,7 @@ public class ArticleController {
 
     @PostMapping("")
     public String add(ArticleDto articleDto) {
-        log.info(articleDto.getTitle());
-        log.info(articleDto.getContents());
+        log.info("{} {} ", articleDto.getTitle(), articleDto.getContents());
         Article savedArticle = articleRepository.save((articleDto.toEntity()));
         log.info("generatedId:{}", savedArticle.getId());
         return "redirect:/articles/" + savedArticle.getId();
