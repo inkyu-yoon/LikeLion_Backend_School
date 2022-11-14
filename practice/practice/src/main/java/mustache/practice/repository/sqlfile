@@ -1,2 +1,2 @@
-SELECT full_address FROM `inkyu-db`.hospital
-where full_address like "%수원시%";
+SELECT hospital_name, full_address FROM `inkyu-db`.hospital
+where full_address like "%수원시%" and hospital_name like "%피부%";
