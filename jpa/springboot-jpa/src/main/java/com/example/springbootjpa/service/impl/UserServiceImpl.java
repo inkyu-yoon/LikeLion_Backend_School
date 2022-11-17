@@ -30,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserAddResponseDto add(UserAddRequestDto userAddRequestDto) {
+
         User savedUser = userRepository.save(userAddRequestDto.toEntity());
         UserAddResponseDto userAddResponseDto = new UserAddResponseDto();
         userAddResponseDto.setUsername(savedUser.getUsername());
