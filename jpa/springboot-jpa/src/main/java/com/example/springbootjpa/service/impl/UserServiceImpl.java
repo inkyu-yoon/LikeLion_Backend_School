@@ -9,6 +9,7 @@ import com.example.springbootjpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserAddResponseDto add(UserAddRequestDto userAddRequestDto) {
-
+        List<User> all = userRepository.findAll();
+        for (User user : all) {
+            if (user.getUsername().equals(userAddRequestDto.getUsername())) {
+                return new UserAddResponseDto("", "해당 id는 중복입니다.");
+            }
+        }
         User savedUser = userRepository.save(userAddRequestDto.toEntity());
         UserAddResponseDto userAddResponseDto = new UserAddResponseDto();
         userAddResponseDto.setUsername(savedUser.getUsername());
