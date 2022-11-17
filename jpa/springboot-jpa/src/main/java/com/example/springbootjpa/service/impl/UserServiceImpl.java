@@ -5,7 +5,9 @@ import com.example.springbootjpa.entity.User;
 import com.example.springbootjpa.repository.UserRepository;
 import com.example.springbootjpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -19,7 +21,8 @@ public class UserServiceImpl implements UserService {
     public UserFindDto findUser(Long number) {
         User foundUser = userRepository.findById(number).get();
         UserFindDto user = new UserFindDto();
-
-        return null;
+        user.setId(foundUser.getId());
+        user.setUsername(foundUser.getUsername());
+        return user;
     }
 }
