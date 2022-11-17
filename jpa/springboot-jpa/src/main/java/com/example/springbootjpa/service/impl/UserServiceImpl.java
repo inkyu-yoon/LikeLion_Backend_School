@@ -1,5 +1,7 @@
 package com.example.springbootjpa.service.impl;
 
+import com.example.springbootjpa.dto.UserAddRequestDto;
+import com.example.springbootjpa.dto.UserAddResponseDto;
 import com.example.springbootjpa.dto.UserFindDto;
 import com.example.springbootjpa.entity.User;
 import com.example.springbootjpa.repository.UserRepository;
@@ -24,5 +26,15 @@ public class UserServiceImpl implements UserService {
         user.setId(foundUser.getId());
         user.setUsername(foundUser.getUsername());
         return user;
+    }
+
+    @Override
+    public UserAddResponseDto add(UserAddRequestDto userAddRequestDto) {
+        User savedUser = userRepository.save(userAddRequestDto.toEntity());
+        UserAddResponseDto userAddResponseDto = new UserAddResponseDto();
+        userAddResponseDto.setUsername(savedUser.getUsername());
+        userAddResponseDto.setMessage("가입이 완료 되었습니다");
+
+        return userAddResponseDto;
     }
 }
