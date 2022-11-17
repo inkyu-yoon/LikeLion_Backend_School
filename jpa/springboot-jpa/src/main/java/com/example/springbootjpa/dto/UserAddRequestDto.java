@@ -3,10 +3,12 @@ package com.example.springbootjpa.dto;
 
 import com.example.springbootjpa.entity.User;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
+@EqualsAndHashCode
 public class UserAddRequestDto {
     private String username;
     private String password;

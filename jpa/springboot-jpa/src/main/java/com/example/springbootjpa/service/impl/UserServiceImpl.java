@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         User savedUser = userRepository.save(userAddRequestDto.toEntity());
         UserAddResponseDto userAddResponseDto = new UserAddResponseDto();
         userAddResponseDto.setUsername(savedUser.getUsername());
-        userAddResponseDto.setMessage("가입이 완료 되었습니다");
+        userAddResponseDto.setMessage("가입이 완료 되었습니다.");
 
         return userAddResponseDto;
     }
