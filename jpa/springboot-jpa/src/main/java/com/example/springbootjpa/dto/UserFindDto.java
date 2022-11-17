@@ -10,4 +10,5 @@ import lombok.*;
 public class UserFindDto {
     private Long id;
     private String username;
+    private String message;
 }

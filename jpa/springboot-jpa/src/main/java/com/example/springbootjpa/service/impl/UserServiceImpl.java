@@ -9,6 +9,8 @@ import com.example.springbootjpa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -21,11 +23,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserFindDto findUser(Long number) {
-        User foundUser = userRepository.findById(number).get();
-        UserFindDto user = new UserFindDto();
-        user.setId(foundUser.getId());
-        user.setUsername(foundUser.getUsername());
-        return user;
+        Optional<User> optUser = userRepository.findById(number);
+        if (optUser.isEmpty()) {
+            return new UserFindDto(number, "", "해당 id 유저가 없습니다.");
+        } else {
+            User foundUser = optUser.get();
+            return new UserFindDto(foundUser.getId(), foundUser.getUsername(), foundUser.getPassword());
+        }
+
     }
 
     @Override
