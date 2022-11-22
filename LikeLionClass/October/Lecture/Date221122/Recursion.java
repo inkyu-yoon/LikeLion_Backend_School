@@ -9,6 +9,15 @@ public class Recursion {
         System.out.println("arraySum(arr.length-1) = " + arraySum(arr.length-1));
         printStar(3);
         System.out.println();
+        System.out.println("getSum(10) = " + getSum(10));
+    }
+
+    static int getSum(int n) {
+        if (n == 1) {
+            return 1;
+        }
+
+        return n + getSum(n - 1);
     }
 
     //별 출력
