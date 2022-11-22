@@ -7,8 +7,19 @@ public class Recursion {
     public static void main(String[] args) {
         print1To100(1);
         System.out.println("arraySum(arr.length-1) = " + arraySum(arr.length-1));
+        printStar(3);
+        System.out.println();
     }
 
+    //별 출력
+    static void printStar(int n) {
+        if (n == 0) {
+            return;
+        }
+        System.out.print("*");
+        printStar(n-1);
+
+    }
 
     // 배열 합 재귀
     static int arraySum(int n) {
