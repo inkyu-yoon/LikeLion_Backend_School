@@ -1,8 +1,13 @@
 package October.Lecture.Date221122;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Recursion {
 
     static int[] arr = {7, 3, 2, 9};
+
+    static List<Integer> list = new ArrayList<>();
 
     public static void main(String[] args) {
         print1To100(1);
@@ -11,6 +16,19 @@ public class Recursion {
         System.out.println();
         System.out.println("getSum(10) = " + getSum(10));
         System.out.println("getSum2(1234) = " + getSum2(1234));
+        list.add(7);
+        list.add(3);
+        list.add(2);
+        list.add(9);
+        System.out.println("getSum3(list.size()-1) = " + getSum3(list.size()-1));
+    }
+
+    static int getSum3(int n) {
+        if (n < 0) {
+            return 0;
+
+        }
+        return list.get(n) + getSum3(n - 1);
     }
 
     // 재귀로 각 자리 수의 합 구하기
@@ -18,7 +36,7 @@ public class Recursion {
         if (n == 0) {
             return 0;
         }
-        return n%10 + getSum2(n / 10);
+        return n % 10 + getSum2(n / 10);
     }
 
     //1 부터 n 까지 재귀로 합 구하기
